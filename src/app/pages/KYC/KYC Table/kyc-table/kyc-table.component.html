@@ -1,0 +1,75 @@
+<div class="container">
+
+    <!-- <form>
+        <div class="form-flex">
+            <mat-form-field class="flex-item" appearance="fill">
+                <mat-label>Document Type</mat-label>
+                <mat-select formControlName="document" matInput type="text" >
+                    <mat-option>Completed Proposal Form</mat-option>
+                    <mat-option>Valid means of Identification</mat-option>
+                    <mat-option>Passport Photo</mat-option>
+                    <mat-option>Other</mat-option>
+                </mat-select>                
+            </mat-form-field> 
+        </div>
+        <button  mat-raised-button color="primary" style="float: right; margin-right: 20px; margin-bottom: 20px;"  type="button"  (click)="createBeneficiary()">
+            Add File
+        </button>
+    </form> -->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            
+    
+    <ng-container matColumnDef="docType">
+        <th mat-header-cell *matHeaderCellDef disableClear> Document</th>
+        <td mat-cell *matCellDef="let element" class="left-td" > {{element.documentType}} </td>
+    </ng-container>
+    <!-- <ng-container matColumnDef="docName">
+        <th mat-header-cell *matHeaderCellDef disableClear> File Name</th>
+        <td mat-cell *matCellDef="let element" class="left-td" > {{element.documentName}} </td>
+    </ng-container> -->
+    <ng-container matColumnDef="submitted">
+        <th mat-header-cell *matHeaderCellDef disableClear> Submission Status</th>
+        <td mat-cell *matCellDef="let element" class="left-td" > 
+            <mat-form-field>oiranlo
+                <mat-label></mat-label>
+                <mat-select matInput type="text" >
+                    <mat-option [value]="element.submissionStatus" *ngFor="let item of status">{{item.name}}</mat-option>
+                </mat-select>                
+            </mat-form-field> 
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="docNum">
+        <th mat-header-cell *matHeaderCellDef disableClear> Document Number </th>
+        <td mat-cell *matCellDef="let element" class="left-td" > {{element.documentNumber}} </td>
+    </ng-container>
+    <ng-container matColumnDef="uploadDate">
+        <th mat-header-cell *matHeaderCellDef disableClear> Upload Date</th>
+        <td mat-cell *matCellDef="let element" class="left-td" > {{element.uploadDate | date}} </td>
+    </ng-container>
+    <ng-container matColumnDef="file">
+        <th mat-header-cell *matHeaderCellDef disableClear> </th>
+        <td mat-cell *matCellDef="let element" class="left-td" >
+            <input formControlName="attachments"  class="flex-item-2"    type="file"  >                                   
+        </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>menu</mat-icon> </button>
+                <mat-menu #menu="matMenu">
+                    <!-- <button mat-menu-item (click)="openModal(element)"><mat-icon>edit</mat-icon> Edit</button> -->
+                    <button mat-menu-item ><mat-icon>delete</mat-icon> Delete</button>
+                </mat-menu>
+          </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="headers"></tr>
+    <tr mat-row  *matRowDef = "let row; columns: headers;"></tr>
+    </table>
+    
+    <br>
+    
+    <mat-paginator [length]="this.dataSource.data.length" [pageSize]="5"  [pageIndex]="0" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    
+</div>

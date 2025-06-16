@@ -1,0 +1,88 @@
+<form [formGroup]="beneficiaryForm">
+    <h2>Add Beneficiary</h2>
+    <div class="form-flex">
+        <mat-form-field class="flex-item" appearance="fill">
+            <mat-label>Surname</mat-label>
+            <input formControlName="surname" matInput type="text" >                
+        </mat-form-field> 
+        <mat-form-field class="flex-item" appearance="fill">
+            <mat-label>Other Names</mat-label>
+            <input formControlName="otherNames" matInput type="text" >                
+        </mat-form-field> 
+        <mat-form-field appearance="fill"  class="flex-item">
+            <mat-label>Date of Birth</mat-label>
+            <input formControlName="dob" matInput [matDatepicker]="dob" [max]="currentDate" (dateChange)="getBeneficiaryAge()"[readonly]="true">   
+            <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>     
+            <mat-datepicker #dob ></mat-datepicker>           
+        </mat-form-field>  
+    </div> 
+    <div class="form-flex">
+        <mat-form-field class="flex-item" appearance="fill">
+            <mat-label>Relation</mat-label>
+            <mat-select formControlName="relation" matInput type="text" >
+                <mat-option>Father</mat-option>
+                <mat-option>Mother</mat-option>
+                <mat-option>Sibling</mat-option>
+                <mat-option>Other</mat-option>
+            </mat-select>                
+        </mat-form-field> 
+        <mat-form-field class="flex-item" appearance="fill">
+            <mat-label>Phone Number</mat-label>
+            <input formControlName="phoneNumber" matInput type="number" >                
+        </mat-form-field> 
+        <mat-form-field class="flex-item" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput type="email">                
+        </mat-form-field> 
+        
+    </div>
+    <div class="form-flex">
+        <mat-form-field class="flex-item" appearance="fill">
+            <mat-label>Input Percentage(%)</mat-label>
+            <input formControlName="inputPercentage" matInput type="number" min="0" max="100" >                
+        </mat-form-field> 
+        <mat-form-field class="flex-item" appearance="fill">
+            <mat-label>Is Beneficiary a minor?</mat-label>
+            <mat-select formControlName="isMinor" matInput type="text">
+                <mat-option *ngFor="let option of bool" [disabled]="true" [value]="option.value">{{option.name}}</mat-option>
+            </mat-select>                
+        </mat-form-field>  
+        
+    </div>
+    <div *ngIf="this.beneficiaryForm.value.isMinor =='Y'">
+        <h3>Guardian Details</h3>
+        <div class="form-flex">
+            <mat-form-field class="flex-item" appearance="fill">
+                <mat-label>Guardian Surname</mat-label>
+                <input formControlName="guardianSurname" matInput type="text" >                
+            </mat-form-field> 
+            <mat-form-field class="flex-item" appearance="fill">
+                <mat-label>Guardian Other Names</mat-label>
+                <input formControlName="guardianOtherNames" matInput type="text" >                
+            </mat-form-field> 
+            <mat-form-field appearance="fill"  class="flex-item">
+                <mat-label>Guardian Date of Birth</mat-label>
+                <input formControlName="guardiandob" matInput [max]="minBeneficiaryAge" [matDatepicker]="guardiandob" [readonly]="true">   
+                <mat-datepicker-toggle matSuffix [for]="guardiandob"></mat-datepicker-toggle>     
+                <mat-datepicker #guardiandob ></mat-datepicker>           
+            </mat-form-field>  
+        </div> 
+        <div class="form-flex">
+            <mat-form-field class="flex-item" appearance="fill">
+                <mat-label>Guardian Number</mat-label>
+                <input formControlName="guardianPhoneNumber" matInput type="number" >                
+            </mat-form-field> 
+            <mat-form-field class="flex-item" appearance="fill">
+                <mat-label>Guardian Email</mat-label>
+                <input formControlName="guardianEmail" matInput type="email">                
+            </mat-form-field> 
+        </div>
+    </div>
+
+    <div class="button-div">    
+        <mat-card-actions  style="text-align: right;">
+            <button mat-raised-button color="primary" type="button"><mat-icon>save</mat-icon> Submit</button>
+        </mat-card-actions>
+      </div>
+    
+  </form>

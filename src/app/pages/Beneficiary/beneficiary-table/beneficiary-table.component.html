@@ -1,0 +1,45 @@
+    <button  mat-raised-button color="primary" style="float: right; margin-right: 20px; margin-bottom: 20px;"  type="button"  (click)="createBeneficiary()">
+        New Beneficiary
+    </button>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            
+    
+    <ng-container matColumnDef="Surname">
+        <th mat-header-cell *matHeaderCellDef disableClear> Surname</th>
+        <td mat-cell *matCellDef="let element" class="left-td" > {{element.surname}} </td>
+    </ng-container>
+    <ng-container matColumnDef="OtherName">
+        <th mat-header-cell *matHeaderCellDef disableClear> otherName</th>
+        <td mat-cell *matCellDef="let element" class="left-td" > {{element.otherName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="DOB">
+        <th mat-header-cell *matHeaderCellDef disableClear> DOB</th>
+        <td mat-cell *matCellDef="let element" class="left-td" > {{element.dob | date}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Relation">
+        <th mat-header-cell *matHeaderCellDef disableClear> Relation</th>
+        <td mat-cell *matCellDef="let element" class="left-td" > {{element.relation}} </td>
+    </ng-container>
+    <ng-container matColumnDef="inputPercentage">
+        <th mat-header-cell *matHeaderCellDef disableClear> Input Percentage(%)</th>
+        <td mat-cell *matCellDef="let element" class="left-td" > {{element.inputPercentage}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>menu</mat-icon> </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="openModal(element)"><mat-icon>edit</mat-icon> Edit</button>
+                    <button mat-menu-item ><mat-icon>delete</mat-icon> Delete</button>
+                </mat-menu>
+          </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="headers"></tr>
+    <tr mat-row  *matRowDef = "let row; columns: headers;"></tr>
+    </table>
+
+    <br>
+
+    <mat-paginator [length]="this.dataSource.data.length" [pageSize]="5"  [pageIndex]="0" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>

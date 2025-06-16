@@ -1,0 +1,93 @@
+
+<mat-card>
+    <br>
+    <mat-card-title>New Proposal</mat-card-title>
+    <br>
+<div>
+    <!-- <mat-stepper orientation="horizontal" [linear]="true" #stepper > -->
+        <mat-stepper orientation="horizontal" #stepper >
+        <mat-step [editable]="false">
+            <ng-template matStepLabel>DUPLICATE CHECK</ng-template>
+            <app-all-clients [sourceC]="true" (returnClient)="nextStepper($event)"></app-all-clients>
+        </mat-step>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>INSURANCE INFO</ng-template>
+            <div class="form-flex">
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Branch</mat-label>
+                    <mat-select formControlName="branch" matInput type="text" >
+                        <mat-option *ngFor="let item of mockService.Branches" [value]="item.value">{{item.name}}</mat-option>
+                    </mat-select>                
+                </mat-form-field>  
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Product</mat-label>
+                    <mat-select formControlName="product" matInput type="text" >
+                        <mat-option *ngFor="let item of mockService.Products" [value]="item.name">{{item.name}}</mat-option>
+                    </mat-select>                
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Agent</mat-label>
+                    <input formControlName="agent" matInput type="text" readonly="true" >      
+                    <mat-icon (click)="searchAgent()" matSuffix>search</mat-icon>            
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Client</mat-label>
+                    <input formControlName="client" matInput type="text" >                
+                </mat-form-field> 
+            </div> 
+            <div class="form-flex">
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Payment Frequency</mat-label>
+                    <input formControlName="paymentFrequency" matInput type="text" >                
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Term</mat-label>
+                    <input formControlName="term" matInput type="text" >                
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Sum Assured</mat-label>
+                    <input formControlName="sumAssured" matInput type="number" min="0" >                
+                </mat-form-field> 
+                <mat-form-field appearance="fill"  class="flex-item">
+                    <mat-label>Proposal Date</mat-label>
+                    <input formControlName="proposalDate" matInput [matDatepicker]="proposalDate" [readonly]="true">   
+                    <mat-datepicker-toggle matSuffix [for]="proposalDate"></mat-datepicker-toggle>     
+                    <mat-datepicker #proposalDate ></mat-datepicker>           
+                </mat-form-field>  
+            </div> 
+            <div class="form-flex">
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Input Contribution (%)</mat-label>
+                    <input formControlName="inputProposal" matInput type="number" [min]="1" [max]="100" >                
+                </mat-form-field> 
+            </div>
+            <div class="button-div">    
+                <mat-card-actions  style="text-align: right;">
+                    <button mat-raised-button matStepperNext><mat-icon>skip_next</mat-icon> Next</button>
+                </mat-card-actions>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>BENEFICIARY</ng-template>
+          <app-beneficiary-table></app-beneficiary-table>
+          <div class="button-div">    
+            <mat-card-actions  style="text-align: right;">
+                <button mat-raised-button class="actionButton" matStepperPrevious><mat-icon>skip_previous</mat-icon> Back</button>
+                <button mat-raised-button matStepperNext><mat-icon>skip_next</mat-icon> Next</button>
+            </mat-card-actions>
+        </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>KYC</ng-template>
+          <app-kyc-table></app-kyc-table>
+          <div class="button-div">    
+            <mat-card-actions  style="text-align: right;">
+                <button mat-raised-button color="primary" type="button"><mat-icon>save</mat-icon> Submit</button>
+            </mat-card-actions>
+          </div>
+        </mat-step>
+    </mat-stepper>
+</div>
+</mat-card>

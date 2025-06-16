@@ -1,0 +1,249 @@
+.header-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    padding: 10px 16px;
+}
+
+.header-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.section-title{
+  font-size: large;
+  font-weight: bold;
+  color: #333;
+}
+  
+button[mat-icon-button] {
+    color: #900000;
+}
+
+
+.policy-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.section-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 20px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #007BFF;
+    color: #007BFF;
+    text-align: left; 
+}
+
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+  gap: 5px;
+  padding: 5px 0;
+}
+
+.detail-item {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+   
+    font-weight: bold;
+   
+}
+
+.detail-item span {
+    
+    display: block;
+    
+    margin-bottom: 5px;
+}
+
+/* Beautiful Modern Tab Styling */
+.custom-tabs {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Tab Header Container */
+  .custom-tabs .mat-tab-header {
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  /* Individual Tab Styling */
+  .custom-tabs .mat-tab-label {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #555;
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Active Tab */
+  .custom-tabs .mat-tab-label.mat-tab-label-active {
+    background: linear-gradient(to right, #007bff, #0056b3);
+    color: white !important;
+    border-radius: 8px 8px 0 0;
+    font-weight: bold;
+  }
+  
+  /* Hover Effect */
+  .custom-tabs .mat-tab-label:hover {
+    background: rgba(0, 123, 255, 0.1);
+    border-radius: 8px 8px 0 0;
+  }
+  
+  /* Ink Bar (Underline Effect for Active Tab) */
+  .custom-tabs .mat-ink-bar {
+    background: #900000 !important;
+    height: 3px;
+    border-radius: 5px;
+  }
+  
+  
+  
+  /* Detail Item Styling */
+  .detail-item {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: left;
+    font-weight: 600;
+   
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .detail-item:hover {
+    transform: translateY(-3px);
+  }
+
+  ::ng-deep .mat-tab-group {
+    margin-top: 10px;
+  }
+  
+  /* Style for the tab labels */
+  ::ng-deep .mat-tab-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555; 
+    
+    padding: 12px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Remove the default underline effect */
+  ::ng-deep .mat-tab-header {
+    border-bottom: none !important;
+  }
+  
+  /* Style for the active tab */
+  ::ng-deep .mat-tab-label.mat-tab-label-active {
+    color: #900000 !important;
+    background-color: rgba(144, 0, 0, 0.1); /* Light red background for active tab */
+    border-radius: 5px;
+  }
+  
+  /* Hover effect */
+  ::ng-deep .mat-tab-label:hover {
+    background-color: rgba(144, 0, 0, 0.2); /* Slight hover effect */
+    color: #900000;
+  }
+
+  ::ng-deep .details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    
+    position: relative; /* Ensures button positioning remains within the grid */
+  }
+  
+  ::ng-deep .edit-container {
+    grid-column: -1 / 1; /* Makes it span full width */
+    display: flex;
+    justify-content: flex-end; /* Aligns to the right */
+  }
+  
+  ::ng-deep .edit-button {
+    background-color: #900000;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Adds space between icon and text */
+  }
+  
+  ::ng-deep .edit-button mat-icon {
+    font-size: 18px;
+  }
+  
+  ::ng-deep .edit-button:hover {
+    background-color: #700000;
+  }
+  .modal-body {
+    padding: 1rem;
+  }
+  
+  .form-control {
+    font-size: 14px;
+    padding: 10px;
+  }
+  
+  .text-danger {
+    font-size: 12px;
+  }
+  
+  .row-cols-md-3 .col {
+    display: flex;
+    flex-direction: column;
+  }
+  
+
+
+  
+  .modal-content {
+   
+    border-radius: 10px; /* Rounded corners */
+  }
+  
+  
+  
+  
+  
+  
+ 
+
+/* mat-tab-group {
+    margin-top: 10px;
+  }
+  
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 15px 0;
+  }
+  
+  .detail-item {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: left;
+    font-weight: bold;
+  } */
+  
+  

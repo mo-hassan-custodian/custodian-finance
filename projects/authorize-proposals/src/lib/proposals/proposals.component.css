@@ -1,0 +1,61 @@
+.containers {
+    display: flex;
+    justify-content: space-between; /* To evenly distribute columns */
+    background: white;
+    border-radius: 10px;
+
+}
+span{
+    font-weight: bolder;
+}
+
+.column {
+    flex: auto; /* Each column takes up equal space */
+    padding: 20px;
+    border: 0px solid #ccc;
+/* background: #ebebeb; */
+}
+
+.mat-elevation-z8 {
+    width:97%;
+     /* margin-right:20px; */
+    margin-left: 20px;
+}
+.filter{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+table {
+    width: 100%;
+  }
+  
+  th {
+    text-align: left;
+    font-weight: bold;
+  }
+  
+.table-container {
+    background: white;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+.form-flex{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: .75rem;
+  }
+  
+  .flex-item{
+    flex-grow: 1;
+    padding: 10px;
+  }
+  .form-flex > 
+  .flex-item-2{
+      flex-grow: 2;
+      padding: 10px;
+  }
+  
+
+  

@@ -1,0 +1,479 @@
+<div class="main-container">
+  <div class="left-container">
+    <!-- Product Dropdown -->
+    <!-- <h2>Underwriting</h2> -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Select Product</mat-label>
+      <mat-select (selectionChange)="onProductSelect($event.value)">
+        <mat-option *ngFor="let product of products" [value]="product.id">
+          {{ product.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Product Options Dropdown -->
+    <mat-form-field
+      appearance="outline"
+      class="full-width"
+      *ngIf="selectedProduct"
+    >
+      <mat-label>Select Product Option</mat-label>
+      <mat-select (selectionChange)="onOptionSelect($event.value)">
+        <mat-option *ngFor="let option of productOptions" [value]="option.id">
+          {{ option.name }}
+        </mat-option>
+      </mat-select>
+      <!-- <mat-icon matSuffix>arrow_drop_down</mat-icon> -->
+    </mat-form-field>
+
+    <!-- Actions for Selected Option -->
+    <div *ngIf="selectedOption" class="actions">
+      <button mat-raised-button color="primary" (click)="onAction('new')">
+        <mat-icon>add</mat-icon>
+        New
+      </button>
+      <button mat-raised-button color="accent" (click)="onAction('replicate')">
+        <mat-icon>content_copy</mat-icon>
+        Replicate
+      </button>
+      <button mat-raised-button color="warn" (click)="onAction('delete')">
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </div>
+  </div>
+
+  <!-- Right Container (Stepper) -->
+  <div class="right-container" *ngIf="showForm">
+    <mat-stepper linear>
+      <!-- Step 1: Product Options -->
+      <mat-step label="Product Options">
+        <!-- <h3>Configure Product Options</h3> -->
+        <h3>
+          {{
+            isReplicating
+              ? "Replicate Product Options"
+              : "Configure Product Options"
+          }}
+        </h3>
+        <form [formGroup]="productOptionsForm">
+          <div class="two-column-layout">
+            <!-- Column 1 -->
+            <div class="column">
+              <!-- Short Description -->
+              <div class="form-group">
+                <label for="shortDescription">Short Description</label>
+                <input
+                  id="shortDescription"
+                  formControlName="shortDescription"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Description -->
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea
+                  id="description"
+                  formControlName="description"
+                  class="form-control"
+                ></textarea>
+              </div>
+
+              <!-- Remarks -->
+              <div class="form-group">
+                <label for="remarks">Remarks</label>
+                <textarea
+                  id="remarks"
+                  formControlName="remarks"
+                  class="form-control"
+                ></textarea>
+              </div>
+
+              <!-- Partly Maturity % -->
+              <div class="form-group">
+                <label for="partlyMaturityPercent">Partly Maturity %</label>
+                <input
+                  id="partlyMaturityPercent"
+                  type="number"
+                  formControlName="partlyMaturityPercent"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Maturity Last Period -->
+              <div class="form-group">
+                <label for="maturityLastPeriod">Maturity Last Period</label>
+                <input
+                  id="maturityLastPeriod"
+                  type="number"
+                  formControlName="maturityLastPeriod"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Claim Monthly Installments -->
+              <div class="form-group">
+                <label for="claimMonthlyInstallments"
+                  >Claim Monthly Installments</label
+                >
+                <input
+                  id="claimMonthlyInstallments"
+                  type="number"
+                  formControlName="claimMonthlyInstallments"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Total Maturity Amount -->
+              <div class="form-group">
+                <label for="totalMaturityAmount">Total Maturity Amount</label>
+                <input
+                  id="totalMaturityAmount"
+                  type="number"
+                  formControlName="totalMaturityAmount"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- SV Factor Table -->
+              <div class="form-group">
+                <label for="svFactorTable">SV Factor Table</label>
+                <input
+                  id="svFactorTable"
+                  formControlName="svFactorTable"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- SB Bonus Factor Table -->
+              <div class="form-group">
+                <label for="sbBonusFactorTable">SB Bonus Factor Table</label>
+                <input
+                  id="sbBonusFactorTable"
+                  formControlName="sbBonusFactorTable"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Surr Val Computation Formula -->
+              <div class="form-group">
+                <label for="surrValComputationFormula"
+                  >Surr Val Computation Formula</label
+                >
+                <input
+                  id="surrValComputationFormula"
+                  formControlName="surrValComputationFormula"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Paidup Val Computation Formula -->
+              <div class="form-group">
+                <label for="paidupValComputationFormula"
+                  >Paidup Val Computation Formula</label
+                >
+                <input
+                  id="paidupValComputationFormula"
+                  formControlName="paidupValComputationFormula"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Partial Maturity Payment Frequency -->
+              <div class="form-group">
+                <label for="partialMaturityPaymentFrequency"
+                  >Partial Maturity Payment Frequency</label
+                >
+                <input
+                  id="partialMaturityPaymentFrequency"
+                  formControlName="partialMaturityPaymentFrequency"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Investment Prem Perc -->
+              <div class="form-group">
+                <label for="investmentPremPerc">Investment Prem %</label>
+                <input
+                  id="investmentPremPerc"
+                  type="number"
+                  formControlName="investmentPremPerc"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Partial Maturity Frq. Type -->
+              <div class="form-group">
+                <label for="partialMaturityFrqType"
+                  >Partial Maturity Frq. Type</label
+                >
+                <input
+                  id="partialMaturityFrqType"
+                  formControlName="partialMaturityFrqType"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Use Periods as Div Fact -->
+              <div class="form-group">
+                <label for="usePeriodsAsDivFact">Use Periods as Div Fact</label>
+                <input
+                  id="usePeriodsAsDivFact"
+                  type="checkbox"
+                  formControlName="usePeriodsAsDivFact"
+                />
+              </div>
+
+              <!-- Term Distribution -->
+              <div class="form-group">
+                <label for="termDistribution">Term Distribution</label>
+                <input
+                  id="termDistribution"
+                  formControlName="termDistribution"
+                  class="form-control"
+                />
+              </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="column">
+              <!-- Min Term (Yrs) -->
+              <div class="form-group">
+                <label for="minTermYrs">Min Term (Yrs)</label>
+                <input
+                  id="minTermYrs"
+                  type="number"
+                  formControlName="minTermYrs"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Max Term (Yrs) -->
+              <div class="form-group">
+                <label for="maxTermYrs">Max Term (Yrs)</label>
+                <input
+                  id="maxTermYrs"
+                  type="number"
+                  formControlName="maxTermYrs"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- S.A. Computation -->
+              <div class="form-group">
+                <label for="saComputation">S.A. Computation</label>
+                <input
+                  id="saComputation"
+                  formControlName="saComputation"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Paidup Rate -->
+              <div class="form-group">
+                <label for="paidupRate">Paidup Rate</label>
+                <input
+                  id="paidupRate"
+                  type="number"
+                  formControlName="paidupRate"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- T. Bonus Rate -->
+              <div class="form-group">
+                <label for="tBonusRate">T. Bonus Rate</label>
+                <input
+                  id="tBonusRate"
+                  type="number"
+                  formControlName="tBonusRate"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Escalation Type -->
+              <div class="form-group">
+                <label for="escalationType">Escalation Type</label>
+                <input
+                  id="escalationType"
+                  formControlName="escalationType"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Min Retire Age -->
+              <div class="form-group">
+                <label for="minRetireAge">Min Retire Age</label>
+                <input
+                  id="minRetireAge"
+                  type="number"
+                  formControlName="minRetireAge"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Max Retire Age -->
+              <div class="form-group">
+                <label for="maxRetireAge">Max Retire Age</label>
+                <input
+                  id="maxRetireAge"
+                  type="number"
+                  formControlName="maxRetireAge"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Max Premium Paying Term -->
+              <div class="form-group">
+                <label for="maxPremiumPayingTerm"
+                  >Max Premium Paying Term</label
+                >
+                <input
+                  id="maxPremiumPayingTerm"
+                  type="number"
+                  formControlName="maxPremiumPayingTerm"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Min Premium Paying Term -->
+              <div class="form-group">
+                <label for="minPremiumPayingTerm"
+                  >Min Premium Paying Term</label
+                >
+                <input
+                  id="minPremiumPayingTerm"
+                  type="number"
+                  formControlName="minPremiumPayingTerm"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Calc. Premium Term from Assured Age -->
+              <div class="form-group">
+                <label for="calcPremiumTermFromAssuredAge"
+                  >Calc. Premium Term from Assured Age</label
+                >
+                <input
+                  id="calcPremiumTermFromAssuredAge"
+                  type="checkbox"
+                  formControlName="calcPremiumTermFromAssuredAge"
+                />
+              </div>
+
+              <!-- Min Investment Amount -->
+              <div class="form-group">
+                <label for="minInvestmentAmount">Min Investment Amount</label>
+                <input
+                  id="minInvestmentAmount"
+                  type="number"
+                  formControlName="minInvestmentAmount"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Max Investment Amount -->
+              <div class="form-group">
+                <label for="maxInvestmentAmount">Max Investment Amount</label>
+                <input
+                  id="maxInvestmentAmount"
+                  type="number"
+                  formControlName="maxInvestmentAmount"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Option Currency -->
+              <div class="form-group">
+                <label for="optionCurrency">Option Currency</label>
+                <input
+                  id="optionCurrency"
+                  formControlName="optionCurrency"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- Default Premium Mask -->
+              <div class="form-group">
+                <label for="defaultPremiumMask">Default Premium Mask</label>
+                <input
+                  id="defaultPremiumMask"
+                  formControlName="defaultPremiumMask"
+                  class="form-control"
+                />
+              </div>
+
+              <!-- With Bonus -->
+              <div class="form-group">
+                <label for="withBonus">With Bonus</label>
+                <input
+                  id="withBonus"
+                  type="checkbox"
+                  formControlName="withBonus"
+                />
+              </div>
+
+              <!-- Term Period In -->
+              <div class="form-group">
+                <label for="termPeriodIn">Term Period In</label>
+                <input
+                  id="termPeriodIn"
+                  formControlName="termPeriodIn"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="stepper-actions">
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </mat-step>
+
+      <!-- Step 2: Option Cover Types -->
+      <mat-step label="Option Cover Types">
+        <h3>Select Cover Types</h3>
+        <mat-selection-list [(ngModel)]="selectedCoverTypes">
+          <mat-list-option
+            *ngFor="let coverType of coverTypes"
+            [value]="coverType"
+          >
+            {{ coverType }}
+          </mat-list-option>
+        </mat-selection-list>
+        <div class="stepper-actions">
+          <button mat-raised-button color="primary" matStepperPrevious>
+            Back
+          </button>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </mat-step>
+
+      <!-- Step 3: Frequency of Payment -->
+      <mat-step label="Frequency of Payment">
+        <h3>Select Payment Frequency</h3>
+        <mat-radio-group [(ngModel)]="selectedPaymentFrequency">
+          <mat-radio-button
+            *ngFor="let frequency of paymentFrequencies"
+            [value]="frequency"
+          >
+            {{ frequency }}
+          </mat-radio-button>
+        </mat-radio-group>
+        <div class="stepper-actions">
+          <button mat-raised-button color="primary" matStepperPrevious>
+            Back
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onStepperComplete()"
+          >
+            Complete
+          </button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>

@@ -1,0 +1,139 @@
+
+
+<div class="container">
+
+    <mat-card>
+        <mat-card-title>Convert to Underwriting Proposal</mat-card-title>
+        <br><br>
+        <form [formGroup]="proposalForm">
+            <div class="form-flex">
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Proposal Number</mat-label>
+                    <input formControlName="proposalNumber" matInput [readonly]="true" required type="text" > 
+                    <mat-icon (click)="searchProposal()" matSuffix>search</mat-icon>                 
+                </mat-form-field> 
+                <mat-form-field appearance="fill"  class="flex-item">
+                    <mat-label>Effective Date</mat-label>
+                    <input formControlName="effectiveDate" matInput [matDatepicker]="effectiveDate" [readonly]="true" required>   
+                    <mat-datepicker-toggle matSuffix [for]="effectiveDate"></mat-datepicker-toggle>     
+                    <mat-datepicker #effectiveDate ></mat-datepicker>           
+                </mat-form-field>  
+            </div>
+            <br>
+            <h2>Other Details</h2>
+
+            <div class="form-flex">
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Assured</mat-label>
+                    <input formControlName="assured" matInput  required type="text" >      
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Product</mat-label>
+                    <input formControlName="product" matInput  required type="text" >      
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Term</mat-label>
+                    <input formControlName="term" matInput  required type="number" >      
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Life Rider</mat-label>
+                    <input formControlName="lifeRider" matInput  required type="text" >      
+                </mat-form-field> 
+            </div>
+            <div class="form-flex">
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Life Cover Factor</mat-label>
+                    <input formControlName="lifeCoverFactor" matInput  required type="number" >      
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Joint Proposal</mat-label>
+                    <mat-select formControlName="jointProposal" matInput  required   type="text" >
+                        <mat-option *ngFor="let item of Bool" [value]="item.name">
+                          {{item.name}}
+                        </mat-option>
+                    </mat-select>                
+                </mat-form-field>  
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Is Assured same as Life Assured</mat-label>
+                    <mat-select formControlName="isAssuredSame" matInput  required   type="text" >
+                        <mat-option *ngFor="let item of Bool" [value]="item.name">
+                          {{item.name}}
+                        </mat-option>
+                    </mat-select>                
+                </mat-form-field>    
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Monthly Income</mat-label>
+                    <input formControlName="monthlyIncome" matInput  required type="number" >      
+                </mat-form-field> 
+            </div>
+            <div class="form-flex">
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status" matInput  required   type="text" >
+                        <mat-option *ngFor="let item of Bool" [value]="item.name">
+                          {{item.name}}
+                        </mat-option>
+                    </mat-select>                
+                </mat-form-field>    
+                <mat-form-field appearance="fill"  class="flex-item">
+                    <mat-label>New Effective Date</mat-label>
+                    <input formControlName="newEffectiveDate" matInput [matDatepicker]="newEffectiveDate" [readonly]="true" required>   
+                    <mat-datepicker-toggle matSuffix [for]="newEffectiveDate"></mat-datepicker-toggle>     
+                    <mat-datepicker #newEffectiveDate ></mat-datepicker>           
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Product Option</mat-label>
+                    <mat-select formControlName="productOption" matInput  required   type="text" >
+                        <mat-option *ngFor="let item of Bool" [value]="item.name">
+                          {{item.name}}
+                        </mat-option>
+                    </mat-select>                
+                </mat-form-field>    
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Frequency of Payment</mat-label>
+                    <mat-select formControlName="frequencyOfPayment" matInput  required   type="text" >
+                        <mat-option *ngFor="let item of Bool" [value]="item.name">
+                          {{item.name}}
+                        </mat-option>
+                    </mat-select>                
+                </mat-form-field>    
+            </div>
+            <div class="form-flex">
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Child Age</mat-label>
+                    <input formControlName="childAge" matInput  required type="number" >      
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Sum Assured</mat-label>
+                    <input formControlName="sumAssured" matInput  required type="number" >      
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Coinsured?</mat-label>
+                    <mat-select formControlName="coinsured" matInput  required   type="text" >
+                        <mat-option *ngFor="let item of Bool" [value]="item.name">
+                          {{item.name}}
+                        </mat-option>
+                    </mat-select>                
+                </mat-form-field>  
+                <mat-form-field class="flex-item" appearance="fill" *ngIf="proposalForm.value.coinsured == 'Y'">
+                    <mat-label>Coinsurance Leader?</mat-label>
+                    <mat-select formControlName="coinsuranceLeader" matInput  required   type="text" >
+                        <mat-option *ngFor="let item of Bool" [value]="item.name">
+                          {{item.name}}
+                        </mat-option>
+                    </mat-select>                
+                </mat-form-field>      
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Reference Number</mat-label>
+                    <input formControlName="refNum" matInput  required type="text" >      
+                </mat-form-field> 
+            </div>
+        </form>
+
+        <div class="button-div">    
+            <mat-card-actions  style="text-align: right;">
+                <button mat-raised-button color="primary" [disabled]="!proposalForm.valid" type="button"><mat-icon>save</mat-icon> Submit</button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>

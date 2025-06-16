@@ -1,0 +1,810 @@
+<div class="container" *ngIf="proposal && !isLoading">
+  <div class="header-container">
+    <button mat-icon-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-title">Proposal Details</div>
+  </div>
+
+  <div class="section">
+    <h3 class="section-title">Policy Details</h3>
+    <div class="details-grid">
+      <div class="detail-item">
+        <span>Policy Number:</span><br />
+        {{ proposal.policyNumber }}
+      </div>
+      <div class="detail-item">
+        <span>Proposal Number:</span><br />
+        {{ proposal.proposalNumber }}
+      </div>
+      <div class="detail-item">
+        <span>Status:</span><br />
+        {{ proposal.status }}
+      </div>
+      <div class="detail-item">
+        <span>Maturity Date:</span><br />
+        {{ proposal.maturityDate | date }}
+      </div>
+      <div class="detail-item">
+        <span>Product:</span><br />
+        {{ proposal.product }}
+      </div>
+      <div class="detail-item">
+        <span>Effective Date:</span><br />
+        {{ proposal.effectiveDate | date }}
+      </div>
+      <div class="detail-item">
+        <span>Assured:</span><br />
+        {{ proposal.assured }}
+      </div>
+      <div class="detail-item">
+        <span>Life Assured:</span><br />
+        {{ proposal.lifeAssured }}
+      </div>
+      <div class="detail-item">
+        <span>Joint Life Assured:</span><br />
+        {{ proposal.jointLifeAssured }}
+      </div>
+      <div class="detail-item">
+        <span>Occupation:</span><br />
+        {{ proposal.occupation }}
+      </div>
+      <div class="detail-item">
+        <span>Branch:</span><br />
+        {{ proposal.branch }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Endorsement Details Section -->
+  <div class="section position-relative">
+    <mat-tab-group>
+      <!-- Tab 1: Endorsement Details -->
+      <mat-tab label="Endorsement Details">
+        <div class="d-flex justify-content-between mt-3 mb-2">
+          <button
+            style="background-color: #900000; color: white"
+            class="btn fw-100 p-2"
+            (click)="openVerifyModal(verifycontent)"
+          >
+            Verify Allocation
+          </button>
+
+          <button
+            style="background-color: #900000; color: white"
+            class="btn fw-100 p-2"
+            (click)="openModal(content)"
+          >
+            Click here to Edit
+          </button>
+        </div>
+
+        <div class="details-grid">
+          <div class="detail-item">
+            <span>Endr No.:</span><br />
+            {{ proposal.endrNo }}
+          </div>
+          <div class="detail-item">
+            <span>Agent:</span><br />
+            {{ proposal.agent }}
+          </div>
+          <div class="detail-item">
+            <span>Agent Code:</span><br />
+            {{ proposal.agentCode }}
+          </div>
+          <div class="detail-item">
+            <span>Marketer:</span><br />
+            {{ proposal.marketer }}
+          </div>
+          <div class="detail-item">
+            <span>WEF Date:</span><br />
+            {{ proposal.wefDate | date }}
+          </div>
+          <div class="detail-item">
+            <span>Product Option:</span><br />
+            {{ proposal.productOption }}
+          </div>
+          <div class="detail-item">
+            <span>Premium Mask:</span><br />
+            {{ proposal.premiumMask }}
+          </div>
+          <div class="detail-item">
+            <span>ANB:</span><br />
+            {{ proposal.anb }}
+          </div>
+          <div class="detail-item">
+            <span>WET Date:</span><br />
+            {{ proposal.wetDate | date }}
+          </div>
+        </div>
+      </mat-tab>
+
+      <!-- Tab 2: Endorsement Amount -->
+      <mat-tab label="Endorsement Amount">
+        <div class="details-grid">
+          <div class="detail-item">
+            <span>Commission Amount:</span><br />
+            {{ proposal.commissionAmount }}
+          </div>
+          <div class="detail-item">
+            <span>Total Premium Paid:</span><br />
+            {{ proposal.totalPremiumPaid }}
+          </div>
+          <div class="detail-item">
+            <span>BO Debit Day:</span><br />
+            {{ proposal.boDebitDay | date }}
+          </div>
+          <div class="detail-item">
+            <span>BO Start Date:</span><br />
+            {{ proposal.boStartDate | date }}
+          </div>
+          <div class="detail-item">
+            <span>Working ANB:</span><br />
+            {{ proposal.workingAnb }}
+          </div>
+          <div class="detail-item">
+            <span>Bank Account:</span><br />
+            {{ proposal.bankAccount }}
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-content shadow-lg rounded-3">
+    <div
+      class="modal-header text-white d-flex justify-content-center"
+      style="background-color: #900000; height: 80px"
+    >
+      <h5 class="modal-title w-100 text-center fs-4 fw-bold">
+        Edit Endorsement Details
+      </h5>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body px-6 py-4">
+      <form [formGroup]="myForm">
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+          <!-- Product -->
+          <div class="col">
+            <label class="form-label fw-semibold">Product</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="product"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('product')?.invalid && myForm.get('product')?.touched
+              "
+            >
+              Product is required.
+            </small>
+          </div>
+
+          <!-- Effective Date -->
+          <div class="col">
+            <label class="form-label fw-semibold">Effective Date</label>
+            <input
+              type="date"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="effectiveDate"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('effectiveDate')?.invalid &&
+                myForm.get('effectiveDate')?.touched
+              "
+            >
+              Effective Date is required.
+            </small>
+          </div>
+
+          <!-- Policy Number -->
+          <div class="col">
+            <label class="form-label fw-semibold">Policy Number</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="policyNumber"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('policyNumber')?.invalid &&
+                myForm.get('policyNumber')?.touched
+              "
+            >
+              Policy Number is required.
+            </small>
+          </div>
+
+          <!-- Proposal Number -->
+          <div class="col">
+            <label class="form-label fw-semibold">Proposal Number</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="proposalNumber"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('proposalNumber')?.invalid &&
+                myForm.get('proposalNumber')?.touched
+              "
+            >
+              Proposal Number is required.
+            </small>
+          </div>
+
+          <!-- Reference Number -->
+          <div class="col">
+            <label class="form-label fw-semibold">Reference No.</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="referenceNo"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('referenceNo')?.invalid &&
+                myForm.get('referenceNo')?.touched
+              "
+            >
+              Reference Number is required.
+            </small>
+          </div>
+
+          <!-- Assured -->
+          <div class="col">
+            <label class="form-label fw-semibold">Assured</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="assured"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('assured')?.invalid && myForm.get('assured')?.touched
+              "
+            >
+              Assured is required.
+            </small>
+          </div>
+
+          <!-- Life Assured -->
+          <div class="col">
+            <label class="form-label fw-semibold">Life Assured</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="lifeAssured"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('lifeAssured')?.invalid &&
+                myForm.get('lifeAssured')?.touched
+              "
+            >
+              Life Assured is required.
+            </small>
+          </div>
+
+          <!-- Life Class -->
+          <div class="col">
+            <label class="form-label fw-semibold">Life Class</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="lifeClass"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('lifeClass')?.invalid &&
+                myForm.get('lifeClass')?.touched
+              "
+            >
+              Life Class is required.
+            </small>
+          </div>
+
+          <!-- Occupation -->
+          <div class="col">
+            <label class="form-label fw-semibold">Occupation</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="occupation"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('occupation')?.invalid &&
+                myForm.get('occupation')?.touched
+              "
+            >
+              Occupation is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Product Option</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="productOption"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('productOption')?.invalid &&
+                myForm.get('productOption')?.touched
+              "
+            >
+              Product Option is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Premium Mask</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="premiumMask"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('premiumMask')?.invalid &&
+                myForm.get('premiumMask')?.touched
+              "
+            >
+              Premium Task is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Branch</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="branch"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('branch')?.invalid && myForm.get('branch')?.touched
+              "
+            >
+              Branch is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Agent</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="agent"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('agent')?.invalid && myForm.get('agent')?.touched
+              "
+            >
+              Agent is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Marketer</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="marketer"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('marketer')?.invalid &&
+                myForm.get('marketer')?.touched
+              "
+            >
+              Marketer is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Mode of Payment</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="paymentMode"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('paymentMode')?.invalid &&
+                myForm.get('paymentMode')?.touched
+              "
+            >
+              Mode of Payment is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Payment Freq.</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="paymentFrequency"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('paymentFrequency')?.invalid &&
+                myForm.get('paymentFrequency')?.touched
+              "
+            >
+              Payment Frequency is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Term</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="term"
+            />
+            <small
+              class="text-danger"
+              *ngIf="myForm.get('term')?.invalid && myForm.get('term')?.touched"
+            >
+              Term is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Life Rider</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="lifeRider"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('lifeRider')?.invalid &&
+                myForm.get('lifeRider')?.touched
+              "
+            >
+              Life Rider is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Coinsurance</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="coinsurance"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('coinsurance')?.invalid &&
+                myForm.get('coinsurance')?.touched
+              "
+            >
+              Coinsurance is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Retirement Age</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="retirementAge"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('retirementAge')?.invalid &&
+                myForm.get('retirementAge')?.touched
+              "
+            >
+              Retirement Age is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Life Cover Factor</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="lifeCoverFactor"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('lifeCoverFactor')?.invalid &&
+                myForm.get('lifeCoverFactor')?.touched
+              "
+            >
+              Life Cover Factor is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Lapse Time</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="lapseTime"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('lapseTime')?.invalid &&
+                myForm.get('lapseTime')?.touched
+              "
+            >
+              Lapse Time is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Return to Branch Date</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="returnToDate"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('returnToDate')?.invalid &&
+                myForm.get('returnToDate')?.touched
+              "
+            >
+              Return to Branch Date is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold"
+              >Return From Branch Date</label
+            >
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="returnFromDate"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('returnFromDate')?.invalid &&
+                myForm.get('returnFromDate')?.touched
+              "
+            >
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Proposal Sign Date</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="proposalSignDate"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('proposalSignDate')?.invalid &&
+                myForm.get('proposalSignDate')?.touched
+              "
+            >
+              Proposal Sign Date is required.
+            </small>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Submission Date</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="submissionDate"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('submissionDate')?.invalid &&
+                myForm.get('submissionDate')?.touched
+              "
+            >
+              Submission Date is required.
+            </small>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="d-flex justify-content-center p-3">
+      <button
+        type="button"
+        class="btn btn-outline-dark rounded-2 px-4"
+        (click)="modal.dismiss()"
+      >
+        Close
+      </button>
+      <button
+        type="button"
+        style="background-color: #900000; color: white"
+        class="btn rounded-2 px-4 ms-2"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #verifycontent let-modal>
+  <div class="modal-content shadow-lg rounded-3">
+    <div
+      class="modal-header text-white d-flex justify-content-center"
+      style="background-color: #900000; height: 80px"
+    >
+      <h5 class="modal-title w-100 text-center fs-4 fw-bold">
+        Verify Investment
+      </h5>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body px-6 py-4">
+      <form [formGroup]="myForm">
+        <div class="row row-cols-1 row-cols-md-2 g-3">
+          <!-- Product -->
+          <div class="col">
+            <label class="form-label fw-semibold">Policy Fee</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="product"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('product')?.invalid && myForm.get('product')?.touched
+              "
+            >
+              Product is required.
+            </small>
+          </div>
+
+          <!-- Effective Date -->
+          <div class="col">
+            <label class="form-label fw-semibold">Policy Fund</label>
+            <input
+              type="date"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="effectiveDate"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('effectiveDate')?.invalid &&
+                myForm.get('effectiveDate')?.touched
+              "
+            >
+              Effective Date is required.
+            </small>
+          </div>
+
+          <!-- Policy Number -->
+          <div class="col">
+            <label class="form-label fw-semibold">Policy No</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="policyNumber"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('policyNumber')?.invalid &&
+                myForm.get('policyNumber')?.touched
+              "
+            >
+              Policy Number is required.
+            </small>
+          </div>
+
+          <!-- Proposal Number -->
+          <div class="col">
+            <label class="form-label fw-semibold">Prem Alloc.</label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="proposalNumber"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('proposalNumber')?.invalid &&
+                myForm.get('proposalNumber')?.touched
+              "
+            >
+              Proposal Number is required.
+            </small>
+          </div>
+
+          <!-- Reference Number -->
+          <div class="col">
+            <label class="form-label fw-semibold">Investment </label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="referenceNo"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('referenceNo')?.invalid &&
+                myForm.get('referenceNo')?.touched
+              "
+            >
+              Reference Number is required.
+            </small>
+          </div>
+
+          <div class="col">
+            <label class="form-label fw-semibold">Total Prem </label>
+            <input
+              type="text"
+              class="form-control rounded-2 shadow-sm"
+              formControlName="referenceNo"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                myForm.get('referenceNo')?.invalid &&
+                myForm.get('referenceNo')?.touched
+              "
+            >
+              Reference Number is required.
+            </small>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="d-flex justify-content-center p-3">
+      <button
+        type="button"
+        class="btn btn-outline-dark rounded-2 px-4"
+        (click)="modal.dismiss()"
+      >
+        Close
+      </button>
+      <button
+        type="button"
+        style="background-color: #900000; color: white"
+        class="btn rounded-2 px-4 ms-2"
+      >
+        Compute
+      </button>
+    </div>
+  </div>
+</ng-template>

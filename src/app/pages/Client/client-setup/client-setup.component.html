@@ -1,0 +1,160 @@
+<mat-card>
+    <br>
+    <mat-card-title>Client Setup</mat-card-title>
+    <div >
+        
+        <form [formGroup]="clientForm">
+        <mat-stepper  [linear]="true" #stepper>
+            <br><br>
+            <mat-step  >
+            <ng-template matStepLabel><h4>Basic Information</h4></ng-template>
+            
+            <div class="form-flex">
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Title</mat-label>
+                    <mat-select formControlName="title" matInput  required   type="text" >
+                        <mat-option *ngFor="let title of Titles" [value]="title.name">
+                          {{title.name}}
+                        </mat-option>
+                    </mat-select>                
+                </mat-form-field>  
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Surname</mat-label>
+                    <input formControlName="surname" matInput required type="text" >                
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Other Names</mat-label>
+                    <input formControlName="otherNames" matInput required type="text" >                
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="gender" matInput  required   type="text" >
+                        <mat-option *ngFor="let gender of Gender" [value]="gender.name">
+                          {{gender.name}}
+                        </mat-option>
+                    </mat-select>                
+                </mat-form-field>  
+            </div>   
+            <div class="form-flex">
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>PEP ?</mat-label>
+                    <mat-select formControlName="pep" matInput  required   type="text" >
+                        <mat-option *ngFor="let item of mockService.bool" [value]="item.value">{{item.name}}</mat-option>
+                    </mat-select>                
+                </mat-form-field>  
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input formControlName="email" matInput required type="email" >                
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Phone Number</mat-label>
+                    <input formControlName="number" matInput required type="number" >                
+                </mat-form-field> 
+                <mat-form-field  class="flex-item" appearance="fill">
+                    <mat-label>Address</mat-label>
+                    <textarea matInput
+                        formControlName="address" 
+                        type="text" 
+                        required
+                        cdkTextareaAutosize 
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="2"
+                        cdkAutosizeMaxRows="5"></textarea>
+                </mat-form-field>
+            </div> 
+            <div class="form-flex">
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Marital Status</mat-label>
+                    <mat-select formControlName="maritalStatus" matInput  required   type="text" >
+                        <mat-option *ngFor="let status of MaritalStatus" [value]="status.name">
+                          {{status.name}}
+                        </mat-option>
+                    </mat-select>                
+                </mat-form-field>  
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Nationality</mat-label>
+                    <input formControlName="nationality" matInput required type="text" >                
+                </mat-form-field> 
+                <mat-form-field class="flex-item" appearance="fill">
+                    <mat-label>Occupation</mat-label>
+                    <input formControlName="occupation" matInput required type="text" >                
+                </mat-form-field> 
+                <mat-form-field appearance="fill"  class="flex-item">
+                    <mat-label>Date of Birth</mat-label>
+                    <input formControlName="dob" matInput [matDatepicker]="dob" [readonly]="true" required>   
+                    <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>     
+                    <mat-datepicker #dob ></mat-datepicker>           
+                </mat-form-field>  
+            </div> 
+
+            <div class="button-div">    
+                <mat-card-actions  style="text-align: right;">
+                    <button mat-raised-button matStepperNext><mat-icon>skip_next</mat-icon> Next</button>
+                </mat-card-actions>
+            </div>
+            </mat-step>
+            <mat-step  >
+                <ng-template matStepLabel><h4>Other Information</h4></ng-template>
+                <div class="form-flex">
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Height (cm)</mat-label>
+                        <input formControlName="height" matInput required type="number" >                
+                    </mat-form-field> 
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Weight (kg)</mat-label>
+                        <input formControlName="weight" matInput required type="number" >                
+                    </mat-form-field> 
+                    <!-- <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Bank</mat-label>
+                        <input formControlName="bank" matInput required type="text" >                
+                    </mat-form-field>  -->
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Bank</mat-label>
+                        <mat-select formControlName="bank" matInput  required   type="text" >
+                            <mat-option *ngFor="let item of mockService.allBanks" [value]="item.id">{{item.name}}</mat-option>
+                        </mat-select>                
+                    </mat-form-field>
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Account Number</mat-label>
+                        <input formControlName="accountNumber" matInput required type="number" >                
+                    </mat-form-field> 
+                </div>  
+                <div class="form-flex">
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Education</mat-label>
+                        <input formControlName="education" matInput required type="text" >                
+                    </mat-form-field> 
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Religion</mat-label>
+                        <input formControlName="religion" matInput required type="text" >                
+                    </mat-form-field> 
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Admitted ?</mat-label>
+                        <mat-select formControlName="admitted" matInput  required   type="text" >
+                            <mat-option *ngFor="let item of mockService.bool" [value]="item.value">{{item.name}}</mat-option>
+                        </mat-select>                
+                    </mat-form-field>
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>RSA Pin</mat-label>
+                        <input formControlName="rsaPin" matInput required type="text" >                
+                    </mat-form-field> 
+                </div> 
+                
+                <div class="button-div">    
+                    <mat-card-actions  style="text-align: right;">
+                        <button mat-raised-button class="actionButton" matStepperPrevious><mat-icon>skip_previous</mat-icon> Back</button>
+                        <button mat-raised-button color="primary" *ngIf="!isProposal" (click)="submitClient()" type="button"><mat-icon>save</mat-icon> Submit</button>
+                        <button mat-raised-button color="primary" (click)="sanctionCheck()" *ngIf="isProposal && !isSanctioned" type="button"><mat-icon>compare_arrows</mat-icon> Sanction Check</button>
+                        <button mat-raised-button color="primary" (click)="validatePep()" *ngIf="isProposal && isSanctioned" type="button"><mat-icon> person_pin</mat-icon> Validate PEP</button>
+                    </mat-card-actions>
+                </div>
+                </mat-step>
+
+        </mat-stepper>
+  
+        </form>
+    </div>
+    
+</mat-card>
+  
+  

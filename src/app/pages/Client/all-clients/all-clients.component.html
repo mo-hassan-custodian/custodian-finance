@@ -1,0 +1,119 @@
+
+<!-- <mat-card> -->
+    <!-- <br><br> -->
+    <!-- <mat-card-title>Clients</mat-card-title> -->
+    <div>
+
+        <div class="table-container">
+            <br>
+            
+            <form [formGroup]="searchForm">
+                <div class="form-flex">
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Surname</mat-label>
+                        <input formControlName="surname" matInput type="text" >                
+                    </mat-form-field> 
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Other Names</mat-label>
+                        <input formControlName="otherNames" matInput  type="text" >                
+                    </mat-form-field> 
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Policy Number</mat-label>
+                        <input formControlName="policyNumber" matInput type="number" >                
+                    </mat-form-field>
+                    <mat-form-field appearance="fill"  class="flex-item">
+                        <mat-label>Date of Birth</mat-label>
+                        <input formControlName="dob" matInput [matDatepicker]="dob" [readonly]="true">   
+                        <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>     
+                        <mat-datepicker #dob ></mat-datepicker>           
+                    </mat-form-field>  
+                </div> 
+                <div class="form-flex">
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Phone Number</mat-label>
+                        <input formControlName="number" matInput type="number" >                
+                    </mat-form-field>
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Account Number</mat-label>
+                        <input formControlName="accountNumber" matInput type="text" >                
+                    </mat-form-field> 
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Client Type</mat-label>
+                        <mat-select formControlName="clientType" matInput type="text" >
+                            <mat-option>Type 1</mat-option>
+                            <mat-option>Type 2</mat-option>
+                        </mat-select>                
+                    </mat-form-field>  
+                    <mat-form-field class="flex-item" appearance="fill">
+                        <mat-label>Employment Number</mat-label>
+                        <input formControlName="employmentNumber" matInput type="text" >                
+                    </mat-form-field> 
+                    
+                </div> 
+            </form>
+            <button *ngIf="searched" mat-raised-button color="primary" style="float: right; margin-right: 20px; margin-bottom: 20px;"  type="button"  (click)="create()">
+                New Client
+            </button>
+            <button  mat-raised-button color="primary" style="float: right; margin-right: 20px; margin-bottom: 20px;"  type="button"  (click)="search()">
+                Search
+            </button>
+          
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            
+        <ng-container matColumnDef="PolicyNumber">
+            <th mat-header-cell *matHeaderCellDef disableClear> Policy Number</th>
+            <td mat-cell *matCellDef="let element" class="left-td" > {{element.policyNumber}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef disableClear> Name</th>
+            <td mat-cell *matCellDef="let element" class="left-td" > {{element.surname}} {{element.otherNames}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Product">
+            <th mat-header-cell *matHeaderCellDef disableClear> Product</th>
+            <td mat-cell *matCellDef="let element" class="left-td" > {{element.product}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Occupation">
+            <th mat-header-cell *matHeaderCellDef disableClear> Occupation</th>
+            <td mat-cell *matCellDef="let element" class="left-td" > {{element.occupation}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Number">
+            <th mat-header-cell *matHeaderCellDef disableClear> Number</th>
+            <td mat-cell *matCellDef="let element" class="left-td" > {{element.number}} </td>
+        </ng-container>
+        <!-- <ng-container matColumnDef="Premium Amount">
+            <th mat-header-cell *matHeaderCellDef disableClear> Premium Amount</th>
+            <td mat-cell *matCellDef="let element" class="left-td" > {{element.premiumAmount | currency:'':'':'1.2-2'}} </td>
+        </ng-container> -->
+        <ng-container matColumnDef="DOB">
+            <th mat-header-cell *matHeaderCellDef disableClear> DOB</th>
+            <td mat-cell *matCellDef="let element" class="left-td" > {{element.dob | date}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <!-- <button mat-stroked-button class="tableActionButton" (click)="openModal(element)">Renew</button> -->
+                <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>menu</mat-icon> </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item *ngIf="!isProposal" (click)="openModal(element)"><mat-icon>edit</mat-icon> Edit</button>
+                        <button mat-menu-item *ngIf="!isProposal"><mat-icon>delete</mat-icon> Delete</button>
+
+                        <!-- For selection from proposal page-->
+                        <button mat-menu-item *ngIf="isProposal" (click)="selectClient(element)"><mat-icon>check_circle_outline</mat-icon> Select Client</button>
+                    </mat-menu>
+              </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="headers"></tr>
+        <tr mat-row  *matRowDef = "let row; columns: headers;"></tr>
+        </table>
+    
+        <br>
+    
+        <mat-paginator [length]="this.dataSource.data.length" [pageSize]="5"  [pageIndex]="0" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    
+        </div>
+    
+    </div>
+<!-- </mat-card> -->
+

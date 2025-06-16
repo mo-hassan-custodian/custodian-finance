@@ -1,0 +1,90 @@
+.main-container {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  height: 100vh;
+}
+
+.left-container {
+  flex: 1;
+  max-width: 400px;
+}
+
+.right-container {
+  flex: 2;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  height: 90vh; /* Full height of the viewport */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  margin-left: 24px; /* Add some spacing between left and right containers */
+}
+.full-width {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+mat-form-field {
+  background-color: white;
+  border-radius: 4px;
+}
+
+mat-icon {
+  color: inherit;
+}
+
+.two-column-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.stepper-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 100%; /* Full width on small screens */
+    margin: 16px; /* Reduce margin on small screens */
+  }
+  .right-container {
+    margin-left: 0; /* Remove margin on small screens */
+    margin-top: 24px; /* Add spacing between containers on small screens */
+    max-height: 60vh; /* Reduce height for smaller screens */
+  }
+}

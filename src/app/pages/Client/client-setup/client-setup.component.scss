@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh; /* Set the container height to full viewport height */
+}
+
+.card {
+  width: 300px; /* Set the width of the card */
+}
+
+.form-field {
+  width: 100%; /* Ensure form fields take full width */
+  margin-bottom: 20px; /* Add some spacing between form fields */
+}
+
+.mat-horizontal-stepper-header { 
+  pointer-events: none !important; 
+}
+.form-flex{
+  display: flex;
+  flex-wrap: wrap;
+  font-size: .75rem;
+}
+
+.flex-item{
+  flex-grow: 1;
+  padding: 10px;
+}
+.form-flex > 
+.flex-item-2{
+    flex-grow: 2;
+    padding: 10px;
+}
+
+  
