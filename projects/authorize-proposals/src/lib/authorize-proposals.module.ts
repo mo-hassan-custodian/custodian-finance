@@ -39,6 +39,7 @@ import { RenewalComponent } from './renewalcomponent/renewal/renewal.component';
 import { RenewalDetailsComponent } from './renewalcomponent/renewal-details/renewal-details.component';
 import { RateSetupComponent } from './ratesetup/rate-setup/rate-setup.component';
 import { CreateRequisitionComponent } from './requisitions-component/create-requisition/create-requisition.component';
+import { SetupPaymentsComponent } from './payments-component/setup-payments/setup-payments.component';
 
 
 
@@ -53,7 +54,8 @@ import { CreateRequisitionComponent } from './requisitions-component/create-requ
     RenewalComponent,
     RenewalDetailsComponent,
     RateSetupComponent,
-    CreateRequisitionComponent
+    CreateRequisitionComponent,
+    SetupPaymentsComponent
   ],
   imports: [
     CommonModule,

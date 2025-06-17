@@ -21,11 +21,11 @@ import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'lib-renewal',
-  templateUrl: './renewal.component.html',
-  styleUrls: ['./renewal.component.css'],
+  selector: 'lib-setup-payments',
+  templateUrl: './setup-payments.component.html',
+  styleUrls: ['./setup-payments.component.css'],
 })
-export class RenewalComponent implements OnInit {
+export class SetupPaymentsComponent implements OnInit {
   @ViewChild('batchUploadModal') batchUploadModal: any;
   searchForm: FormGroup;
   searched: boolean = false;

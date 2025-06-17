@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RenewalComponent } from './renewal.component';
+import { RenewalComponent } from './setup-payments.component';
 
 describe('RenewalComponent', () => {
   let component: RenewalComponent;

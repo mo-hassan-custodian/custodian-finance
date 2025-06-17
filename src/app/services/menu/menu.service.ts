@@ -165,151 +165,151 @@ export class MenuService {
             {
               "icon": "visibility",
               "name": "Setup Payment Templates",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Setup Cheque Numbers",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Consolidate Requisitions",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Split Cheques",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Authorize",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Print",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Update Printed Payments",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Update PD Cheques",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Cheque Signing Setup",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Cheque Signing Mandate",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Currency Exceptions Setup",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "H2H Statuses",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Dispatch Cheques",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Cancel Payments",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Authorize Canceled Cheques",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Stale Payments",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Dispatch Cheque Preview",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Cheques Status",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Authorise File Transfer Payments",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "File Transfer Download",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "File Transfer Statuses",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Update File Transfer Status",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Authorise Canceled EFTs",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "VAT/WHTAX Certificate",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
             {
               "icon": "visibility",
               "name": "Reports",
-              "route": "/App/create-requisition",
+              "route": "/App/setup-payments",
               "routeParameters": {}
             },
           ]
