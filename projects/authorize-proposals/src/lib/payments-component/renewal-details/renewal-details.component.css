@@ -1,0 +1,64 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.section-title {
+  font-size: large;
+  font-weight: bold;
+  color: #333;
+}
+
+button[mat-icon-button] {
+  color: #900000;
+}
+
+.html,
+.body {
+  overflow-y: hidden;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 5px;
+  padding: 5px 0;
+}
+
+.detail-item {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+
+  font-weight: bold;
+}
+
+.detail-item span {
+  display: block;
+
+  margin-bottom: 5px;
+}
+
+.custom-thead {
+  background-color: #900000 !important;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+}
+
+.custom-thead th {
+  padding: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.custom-thead th:last-child {
+  border-right: none;
+}

@@ -38,6 +38,8 @@ import { PremiumCardComponent } from './premium-card/premium-card.component';
 import { RenewalComponent } from './renewalcomponent/renewal/renewal.component';
 import { RenewalDetailsComponent } from './renewalcomponent/renewal-details/renewal-details.component';
 import { RateSetupComponent } from './ratesetup/rate-setup/rate-setup.component';
+import { CreateRequisitionComponent } from './requisitions-component/create-requisition/create-requisition.component';
+import { SetupPaymentsComponent } from './payments-component/setup-payments/setup-payments.component';
 
 
 
@@ -51,7 +53,9 @@ import { RateSetupComponent } from './ratesetup/rate-setup/rate-setup.component'
     PremiumCardComponent,
     RenewalComponent,
     RenewalDetailsComponent,
-    RateSetupComponent
+    RateSetupComponent,
+    CreateRequisitionComponent,
+    SetupPaymentsComponent
   ],
   imports: [
     CommonModule,
