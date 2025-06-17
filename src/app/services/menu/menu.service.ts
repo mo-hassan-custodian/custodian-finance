@@ -19,7 +19,7 @@ export class MenuService {
   constructor(private _httpClient:HttpClient) {
    this.menuitems = [
     {
-      "menuname": "Setup",
+      "menuname": "Core Setup",
       "iconname": "settings",
       "submenuclass": [
         {
@@ -59,7 +59,7 @@ export class MenuService {
       ]
     },
     {
-      "menuname": "Underwriting",
+      "menuname": "General Ledger",
       "iconname": "library_books",
       "submenuclass": [
         {
@@ -98,6 +98,354 @@ export class MenuService {
               "icon": "visibility",
               "name": "Data Capture",
               "route": "/App/renewal",
+              "routeParameters": {}
+            },
+          ]
+        },
+      ]
+    },
+    {
+      "menuname": "Cash Book",
+      "iconname": "money",
+      "submenuclass": [
+        {
+          "name": "CB - Parameters",
+          "submenu": [
+            {
+              "icon": "visibility",
+              "name": "Data Capture",
+              "route": "/App/NewProposal",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Convert to Proposal",
+              "route": "/App/ConvertProposal",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Convert to Policy",
+              "route": "",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Authorize Policy",
+              "route": "/App/authorize-proposals",
+              "routeParameters": {}
+            },
+          ]
+        },
+        {
+          "name": "CB - Transactions",
+          "submenu": [
+            {
+              "icon": "visibility",
+              "name": "Data Capture",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+          ]
+        },
+        {
+          "name": "CB - Requisitions",
+          "submenu": [
+            {
+              "icon": "visibility",
+              "name": "Create Requisition",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+          ]
+        },
+        {
+          "name": "CB - Payments",
+          "submenu": [
+            {
+              "icon": "visibility",
+              "name": "Setup Payment Templates",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Setup Cheque Numbers",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Consolidate Requisitions",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Split Cheques",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Authorize",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Print",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Update Printed Payments",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Update PD Cheques",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Cheque Signing Setup",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Cheque Signing Mandate",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Currency Exceptions Setup",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "H2H Statuses",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Dispatch Cheques",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Cancel Payments",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Authorize Canceled Cheques",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Stale Payments",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Dispatch Cheque Preview",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Cheques Status",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Authorise File Transfer Payments",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "File Transfer Download",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "File Transfer Statuses",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Update File Transfer Status",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Authorise Canceled EFTs",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "VAT/WHTAX Certificate",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Reports",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+          ]
+        },
+        {
+          "name": "CB - Petty Cash",
+          "submenu": [
+            {
+              "icon": "visibility",
+              "name": "Data Capture",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+          ]
+        },
+        {
+          "name": "CB - Receipts",
+          "submenu": [
+            {
+              "icon": "visibility",
+              "name": "Data Capture",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+          ]
+        },
+        {
+          "name": "CB - Reconciliations",
+          "submenu": [
+            {
+              "icon": "visibility",
+              "name": "Data Capture",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+          ]
+        },
+        {
+          "name": "CB - Inquiries",
+          "submenu": [
+            {
+              "icon": "visibility",
+              "name": "Data Capture",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+          ]
+        },
+      ]
+    },
+    {
+      "menuname": "Debtors",
+      "iconname": "business_center",
+      "submenuclass": [
+        {
+          "name": "New Business",
+          "submenu": [
+            {
+              "icon": "visibility",
+              "name": "Data Capture",
+              "route": "/App/NewProposal",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Convert to Proposal",
+              "route": "/App/ConvertProposal",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Convert to Policy",
+              "route": "",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Authorize Policy",
+              "route": "/App/authorize-proposals",
+              "routeParameters": {}
+            },
+          ]
+        },
+        {
+          "name": "create-requisition",
+          "submenu": [
+            {
+              "icon": "visibility",
+              "name": "Data Capture",
+              "route": "/App/create-requisition",
+              "routeParameters": {}
+            },
+          ]
+        },
+      ]
+    },
+    {
+      "menuname": "Creditors",
+      "iconname": "party_mode",
+      "submenuclass": [
+        {
+          "name": "New Business",
+          "submenu": [
+            {
+              "icon": "visibility",
+              "name": "Data Capture",
+              "route": "/App/NewProposal",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Convert to Proposal",
+              "route": "/App/ConvertProposal",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Convert to Policy",
+              "route": "",
+              "routeParameters": {}
+            },
+            {
+              "icon": "visibility",
+              "name": "Authorize Policy",
+              "route": "/App/authorize-proposals",
+              "routeParameters": {}
+            },
+          ]
+        },
+        {
+          "name": "create-requisition",
+          "submenu": [
+            {
+              "icon": "visibility",
+              "name": "Data Capture",
+              "route": "/App/create-requisition",
               "routeParameters": {}
             },
           ]

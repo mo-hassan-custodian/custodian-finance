@@ -13,6 +13,7 @@ import { PremiumCardComponent } from 'projects/authorize-proposals/src/lib/premi
 import { RenewalComponent } from 'projects/authorize-proposals/src/lib/renewalcomponent/renewal/renewal.component';
 import { RenewalDetailsComponent } from 'projects/authorize-proposals/src/lib/renewalcomponent/renewal-details/renewal-details.component';
 import { RateSetupComponent } from 'projects/authorize-proposals/src/lib/ratesetup/rate-setup/rate-setup.component';
+import { CreateRequisitionComponent } from 'projects/authorize-proposals/src/lib/requisitions-component/create-requisition/create-requisition.component';
 
 const routes: Routes = [
   { path:"",redirectTo:"Home", pathMatch: 'full'},
@@ -30,6 +31,7 @@ const routes: Routes = [
         {path:'proposal-details/:id',component:ProposalDetailsComponent},
         {path:'premium-card',component:PremiumCardComponent},
         {path:'renewal',component:RenewalComponent},
+        {path:'create-requisition',component:CreateRequisitionComponent},
         {path:'renewal-details',component:RenewalDetailsComponent},
         {path:'rate-setup',component:RateSetupComponent},
       ]

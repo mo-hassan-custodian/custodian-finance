@@ -1,0 +1,114 @@
+.containers {
+    display: flex;
+    justify-content: space-between; /* To evenly distribute columns */
+    background: white;
+    border-radius: 10px;
+
+}
+span{
+    font-weight: bolder;
+}
+
+.column {
+    flex: auto; /* Each column takes up equal space */
+    padding: 20px;
+    border: 0px solid #ccc;
+/* background: #ebebeb; */
+}
+
+.mat-elevation-z8 {
+    width:97%;
+     /* margin-right:20px; */
+    margin-left: 20px;
+}
+.filter{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+table {
+    width: 100%;
+  }
+  
+  th {
+    text-align: left;
+    font-weight: bold;
+  }
+  
+.table-container {
+    background: white;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+.padded-form {
+    padding: 20px; /* Adds padding around the form */
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 8px; /* Rounded corners */
+  }
+.form-flex{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: .75rem;
+  }
+  
+  .flex-item{
+    flex-grow: 1;
+    padding: 10px;
+  }
+  .form-flex > 
+  .flex-item-2{
+      flex-grow: 2;
+      padding: 10px;
+  }
+  
+
+  /* Custom modal to ensure proper structure */
+.custom-modal {
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh; /* Keeps modal within viewport */
+}
+
+/* Fix the header at the top */
+.custom-header {
+  background-color: #900000;
+  color: white;
+  font-weight: bold;
+  height: 100px;
+  justify-content: center;
+  width: 100%;
+  padding: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+}
+.modal-title{
+    font-size: 35px;
+}
+
+/* Ensures table headers stand out */
+.custom-table-header th {
+  background-color: #f8f9fa;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Scrollable modal body */
+.custom-body {
+  flex-grow: 1;
+  overflow-y: hidden;
+  max-height: 60vh;
+  padding: 15px;
+}
+
+/* Footer stays at the bottom */
+.custom-footer {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  width: 100%;
+  text-align: right;
+}

@@ -1,0 +1,98 @@
+<div class="container">
+    <div class="header-container">
+        <button mat-icon-button (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      
+        <div class="header-title">Policy Renewal Details</div>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">Policy Details</h3>
+        <div class="details-grid">
+          <div class="detail-item"><span>Policy Number:</span><br> {{ element.policyNumber }}</div>
+          <div class="detail-item"><span>Client:</span><br> {{ element.proposalNumber }}</div>
+          <div class="detail-item"><span>Product:</span><br> {{ element.product }}</div>
+          <div class="detail-item"><span>Status:</span><br> {{ element.status }}</div>
+          <div class="detail-item"><span>Branch:</span><br> {{ element.branch }}</div>
+          <div class="detail-item"><span>Effective Date:</span><br> {{ element.effectiveDate | date }}</div>
+          <div class="detail-item"><span>Maturity Date:</span><br> {{ element.maturityDate | date }}</div>
+          <div class="detail-item"><span>Term:</span><br> {{ element.term }}</div>
+          <div class="detail-item"><span>Payment Frequency:</span><br> {{ element.paymentFrequency }}</div>
+          <div class="detail-item"><span>Agent:</span><br> {{ element.agent }}</div>
+          <div class="detail-item"><span>Agent Code:</span><br> {{ element.agentCode }}</div>
+          <div class="detail-item"><span>OS Balance:</span><br> {{ element.assured }}</div>
+          <div class="detail-item"><span>Checkoff Agent:</span><br> {{ element.checkoffAgent }}</div>
+          <div class="detail-item"><span>Partially Allocated Amt:</span><br> {{ element.allocatedAmount }}</div>
+          <div class="detail-item"><span>Policy Client Status:</span><br> {{ element.policyStatus }}</div>
+         
+         
+        </div>
+        
+      </div>
+
+      <div class="section">
+        <h3 class="section-title mt-4">Payment Details</h3>
+        <div class="details-grid">
+          <div class="detail-item"><span>Total Instals:</span><br> {{ element.policyNumber }}</div>
+          <div class="detail-item"><span>Paid to Date:</span><br> {{ element.proposalNumber }}</div>
+          <div class="detail-item"><span>Paid  instal No.:</span><br> {{ element.product }}</div>
+          <div class="detail-item"><span>OS instals:</span><br> {{ element.status }}</div>
+          <div class="detail-item"><span>Add/Ref Prem:</span><br> {{ element.branch }}</div>
+          <div class="detail-item"><span>Inst. Prem:</span><br> {{ element.effectiveDate | date }}</div>
+          <div class="detail-item"><span>Next Inst. No.:</span><br> {{ element.maturityDate | date }}</div>
+          <div class="detail-item"><span>Next Inst. Prem:</span><br> {{ element.term }}</div>
+          <div class="detail-item"><span>Add/Ref Prem int:</span><br> {{ element.paymentFrequency }}</div>
+          <div class="detail-item"><span>Total Balance:</span><br> {{ element.agent }}</div>
+          <div class="detail-item"><span>Total Prem Paid:</span><br> {{ element.agentCode }}</div>
+          
+         
+         
+         
+        </div>
+        
+      </div>
+
+      <div class="section">
+        <h3 class="section-title mt-4">Receipt Details</h3>
+      
+        <table class="table table-striped mt-3">
+          <thead class="custom-thead" >
+            <tr >
+              <th>Receipt Number</th>
+              <th>Date</th>
+              <th>Transaction Date</th>
+              <th>Deduction Date</th>
+              <th>Cheque No.</th>
+              <th>Old Receipt No.</th>
+              <th>Receipt Amount</th>
+              <th>Premium Allocation</th>
+              <th>Pension Allocation</th>
+              <th>Loan Allocation</th>
+              <th>Policy Fee</th>
+              <th>Reinst. Int. Alloc</th>
+              <th>Compensation Fund</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let receipt of receipts; let i = index">
+              <td>{{ receipt.number }}</td>
+              <td>{{ receipt.date | date: 'MMM d, y' }}</td>
+              <td>{{ receipt.transDate | date: 'MMM d, y' }}</td>
+              <td>{{ receipt.deductionDate | date: 'MMM d, y' }}</td>
+              <td>{{ receipt.chequeNo }}</td>
+              <td>{{ receipt.oldReceiptNo }}</td>
+              <td>{{ receipt.receiptAmt | number }}</td>
+              <td>{{ receipt.premiumAllocation | number }}</td>
+              <td>{{ receipt.penAllocation | number }}</td>
+              <td>{{ receipt.loanAllocation | number }}</td>
+              <td>{{ receipt.policyFee }}</td>
+              <td>{{ receipt.reInstalAllocation }}</td>
+              <td>{{ receipt.compensateFund }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      
+</div>
