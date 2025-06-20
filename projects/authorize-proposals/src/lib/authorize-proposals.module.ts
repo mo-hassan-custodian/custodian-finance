@@ -40,6 +40,7 @@ import { RenewalDetailsComponent } from './renewalcomponent/renewal-details/rene
 import { RateSetupComponent } from './ratesetup/rate-setup/rate-setup.component';
 import { CreateRequisitionComponent } from './requisitions-component/create-requisition/create-requisition.component';
 import { SetupPaymentsComponent } from './payments-component/setup-payments/setup-payments.component';
+import { PayeeModalComponent } from './components/payee-modal/payee-modal.component';
 
 
 
@@ -55,7 +56,8 @@ import { SetupPaymentsComponent } from './payments-component/setup-payments/setu
     RenewalDetailsComponent,
     RateSetupComponent,
     CreateRequisitionComponent,
-    SetupPaymentsComponent
+    SetupPaymentsComponent,
+    PayeeModalComponent
   ],
   imports: [
     CommonModule,
@@ -102,7 +104,8 @@ import { SetupPaymentsComponent } from './payments-component/setup-payments/setu
   exports: [
     AuthorizeProposalsComponent,
     ProposalsComponent,
-    ProposalDetailsComponent
+    ProposalDetailsComponent,
+    PayeeModalComponent
   ],
   providers: [NgbActiveModal],
 })

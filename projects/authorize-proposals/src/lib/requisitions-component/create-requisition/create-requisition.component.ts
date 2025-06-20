@@ -1,24 +1,13 @@
-import {
-  Component,
-  OnInit,
-  AfterViewInit,
-  ViewChild,
-  Input,
-  EventEmitter,
-  Output,
-} from '@angular/core';
-//import { ClientSetupComponent } from '../client-setup/client-setup.component';
-import { MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { MockServiceService } from 'src/app/services/mock-service.service';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PayeeModalComponent } from '../../components/payee-modal/payee-modal.component';
 
 @Component({
   selector: 'lib-create-requisition',
@@ -26,7 +15,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./create-requisition.component.css'],
 })
 export class CreateRequisitionComponent implements OnInit {
-  @ViewChild('createRequisitionModal') createRequisitionModal: any;
+  // Removed @ViewChild('createRequisitionModal') since we're not using intermediate modal anymore
   searchForm: FormGroup;
   searched: boolean = false;
   isProposal: boolean = false;
@@ -40,9 +29,42 @@ export class CreateRequisitionComponent implements OnInit {
     'status',
   ];
 
-  openModal() {
-    this.modalService.open(this.createRequisitionModal, {
+  // Removed old openModal method since we're directly opening payee modal now
+
+  openPayeeModal() {
+    // Directly open the payee modal without intermediate modal
+    const modalRef = this.modalService.open(PayeeModalComponent, {
       backdrop: 'static',
+      keyboard: false,
+      size: 'xl',
+      centered: true,
+      windowClass: 'payee-modal-window'
+    });
+
+    modalRef.result.then(
+      (payeeData) => {
+        // Handle successful payee creation
+        console.log('Payee created successfully:', payeeData);
+        this.toastr.success(`Payee "${payeeData.payee}" created successfully!`);
+
+        // You can add logic here to:
+        // 1. Save the payee data to a service/database
+        // 2. Navigate to a requisition details page
+        // 3. Add the payee to a list for selection
+        // 4. Perform other business logic
+
+        // Example: Navigate to requisition details with the new payee
+        // this.router.navigate(['/App/requisition-details'], {
+        //   queryParams: { payeeId: payeeData.code }
+        // });
+      },
+      () => {
+        // Handle modal dismissal (user clicked cancel or closed modal)
+        console.log('Payee modal dismissed');
+      }
+    ).catch((error) => {
+      // Handle any errors
+      console.error('Error with payee modal:', error);
     });
   }
 

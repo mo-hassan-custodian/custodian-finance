@@ -7,9 +7,9 @@
     color="primary"
     style="float: right; margin-right: 20px; margin-bottom: 20px"
     type="button"
-    (click)="openModal()"
+    (click)="openPayeeModal()"
   >
-    Requisition
+    Create New Payee
   </button>
   <button
     mat-raised-button
@@ -20,7 +20,7 @@
   >
     Filter
   </button>
-  <div class="table-container">
+  <!-- <div class="table-container">
     <br />
 
     <form [formGroup]="searchForm" class="padded-form">
@@ -58,49 +58,10 @@
     >
       Search
     </button>
-  </div>
+  </div> -->
 
   <!-- Modal to Display Search Results -->
-  <ng-template #searchResultsModal let-modal>
-    <div class="modal-content custom-modal">
-      <div class="modal-header custom-header">
-        <h5 class="modal-title">Policies</h5>
-      </div>
 
-      <div class="modal-body custom-body">
-        <table class="table table-bordered">
-          <thead class="custom-table-header">
-            <tr>
-              <th>Proposal Number</th>
-              <th>Policy Number</th>
-              <th>Client</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of searchResults">
-              <td>{{ item.proposalNumber }}</td>
-              <td>{{ item.policyNumber }}</td>
-              <td>{{ item.clientName }}</td>
-              <td>
-                <!-- View Details Button -->
-                <button mat-button color="primary" (click)="viewDetails(item)">
-                  View Details
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Modal Footer -->
-      <div class="modal-footer custom-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close()">
-          Close
-        </button>
-      </div>
-    </div>
-  </ng-template>
 </div>
 
 <ng-template #searchResultsModal let-modal>
@@ -144,49 +105,4 @@
   </div>
 </ng-template>
 
-<ng-template #createRequisitionModal let-modal>
-  <div class="modal-content shadow-lg rounded-3">
-    <!-- Modal Header -->
-    <div
-      class="modal-header text-white d-flex justify-content-center"
-      style="background-color: #900000; height: 80px"
-    >
-      <h5 class="modal-title w-100 text-center fs-4 fw-bold">Create Requisition</h5>
-    </div>
 
-    <!-- Modal Body -->
-    <div class="modal-body px-6 py-4">
-      <!-- Download CSV Section -->
-      <div class="mb-4">
-        <!-- <h6 class="fw-bold">Download Sample CSV</h6> -->
-        <!-- <p>Download a sample CSV file to understand the required format.</p> -->
-        <button class="btn btn-primary" (click)="downloadSampleCSV()">
-          Create
-        </button>
-      </div>
-
-      <!-- Upload CSV Section -->
-      <!-- <div>
-        <h6 class="fw-bold">Upload CSV File</h6>
-        <p>Upload a CSV file to process the data.</p>
-        <input
-          type="file"
-          class="form-control"
-          accept=".csv"
-          (change)="onFileUpload($event)"
-        />
-      </div> -->
-    </div>
-
-    <!-- Modal Footer -->
-    <div class="modal-footer d-flex justify-content-center p-3">
-      <button
-        type="button"
-        class="btn btn-outline-dark rounded-2 px-4"
-        (click)="modal.dismiss()"
-      >
-        Close
-      </button>
-    </div>
-  </div>
-</ng-template>
