@@ -26,7 +26,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./create-requisition.component.css'],
 })
 export class CreateRequisitionComponent implements OnInit {
-  @ViewChild('batchUploadModal') batchUploadModal: any;
+  @ViewChild('createRequisitionModal') createRequisitionModal: any;
   searchForm: FormGroup;
   searched: boolean = false;
   isProposal: boolean = false;
@@ -41,7 +41,7 @@ export class CreateRequisitionComponent implements OnInit {
   ];
 
   openModal() {
-    this.modalService.open(this.batchUploadModal, {
+    this.modalService.open(this.createRequisitionModal, {
       backdrop: 'static',
     });
   }

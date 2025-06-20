@@ -9,7 +9,16 @@
     type="button"
     (click)="openModal()"
   >
-    Batch Upload
+    Requisition
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    style="float: right; margin-right: 20px; margin-bottom: 20px"
+    type="button"
+    
+  >
+    Filter
   </button>
   <div class="table-container">
     <br />
@@ -135,29 +144,29 @@
   </div>
 </ng-template>
 
-<ng-template #batchUploadModal let-modal>
+<ng-template #createRequisitionModal let-modal>
   <div class="modal-content shadow-lg rounded-3">
     <!-- Modal Header -->
     <div
       class="modal-header text-white d-flex justify-content-center"
       style="background-color: #900000; height: 80px"
     >
-      <h5 class="modal-title w-100 text-center fs-4 fw-bold">Batch Upload</h5>
+      <h5 class="modal-title w-100 text-center fs-4 fw-bold">Create Requisition</h5>
     </div>
 
     <!-- Modal Body -->
     <div class="modal-body px-6 py-4">
       <!-- Download CSV Section -->
       <div class="mb-4">
-        <h6 class="fw-bold">Download Sample CSV</h6>
-        <p>Download a sample CSV file to understand the required format.</p>
+        <!-- <h6 class="fw-bold">Download Sample CSV</h6> -->
+        <!-- <p>Download a sample CSV file to understand the required format.</p> -->
         <button class="btn btn-primary" (click)="downloadSampleCSV()">
-          Download Sample CSV
+          Create
         </button>
       </div>
 
       <!-- Upload CSV Section -->
-      <div>
+      <!-- <div>
         <h6 class="fw-bold">Upload CSV File</h6>
         <p>Upload a CSV file to process the data.</p>
         <input
@@ -166,7 +175,7 @@
           accept=".csv"
           (change)="onFileUpload($event)"
         />
-      </div>
+      </div> -->
     </div>
 
     <!-- Modal Footer -->
