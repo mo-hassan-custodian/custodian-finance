@@ -1,8 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
-
-// html, body { height: 100%; }
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }-
-
 /* Global CSS Fix for Angular Material Dropdowns in ng-bootstrap Modals */
 /* Add this to your global styles.scss file */
 
@@ -118,70 +113,3 @@
   background: rgba(255, 0, 0, 0.1) !important;
 }
 */
-
-
-
-@import '~ngx-toastr/toastr.css'; 
-
-html, body { height: 100%;}
-body,body.mat-typography,span,button.mat-menu-item,.mat-typography, .mat-typography h3, .mat-typography h2, .mat-typography h4,
-.mat-typography h5,
-.mat-list-item,.mat-table, .mat-card-title,.mat-paginator, .mat-form-field,.mat-radio-button ,.mat-toolbar h3{
-    margin: 0; 
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: normal;
-}
-
-.form-flex{
-    display: flex;
-    flex-wrap: wrap;
-    font-size: .75rem;
-  }
-  
-  .flex-item{
-    flex-grow: 1;
-    padding: 10px;
-  }
-  .form-flex > 
-  .flex-item-2{
-      flex-grow: 2;
-      padding: 10px;
-  }
-
-  .containers {
-    display: flex;
-    justify-content: space-between; /* To evenly distribute columns */
-    background: white;
-    border-radius: 10px;
-
-}
-
-.column {
-    flex: auto; /* Each column takes up equal space */
-    padding: 20px;
-    border: 0px solid #ccc;
-}
-
-.mat-elevation-z8 {
-    width:97%;
-    // margin-right:20px;
-    margin-left: 20px;
-}
-.filter{
-    display: flex;
-    justify-content: space-between;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.table-container {
-    background: white;
-    margin-top: 10px;
-    border-radius: 10px;
-}
-
-
-
-

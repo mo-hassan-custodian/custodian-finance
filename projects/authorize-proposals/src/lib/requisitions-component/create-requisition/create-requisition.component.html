@@ -16,9 +16,9 @@
     color="primary"
     style="float: right; margin-right: 20px; margin-bottom: 20px"
     type="button"
-    
+    (click)="openGeneralLedgerModal()"
   >
-    Filter
+    General Ledger
   </button>
   <!-- <div class="table-container">
     <br />
@@ -105,4 +105,252 @@
   </div>
 </ng-template>
 
+<!-- General Ledger Modal -->
+<ng-template #generalLedgerModal let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">General Ledger</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 
+    <div class="modal-body">
+      <!-- Add New Entry Form -->
+      <div class="card mb-3">
+        <div class="card-header">
+          <h6 class="mb-0">Add New Entry</h6>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="generalLedgerForm">
+            <div class="row">
+              <!-- Auto Apportion -->
+              <div class="col-md-3 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Auto Apportion</mat-label>
+                  <mat-select formControlName="autoApportion">
+                    <mat-option value="yes">Yes</mat-option>
+                    <mat-option value="no">No</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Cost Center Name -->
+              <div class="col-md-3 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Cost Center Name</mat-label>
+                  <mat-select formControlName="costCenterName">
+                    <mat-option value="admin">Administration</mat-option>
+                    <mat-option value="sales">Sales & Marketing</mat-option>
+                    <mat-option value="operations">Operations</mat-option>
+                    <mat-option value="finance">Finance</mat-option>
+                    <mat-option value="hr">Human Resources</mat-option>
+                    <mat-option value="it">Information Technology</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Expense Type Name -->
+              <div class="col-md-3 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Expense Type Name</mat-label>
+                  <mat-select formControlName="expenseTypeName">
+                    <mat-option value="office_supplies">Office Supplies</mat-option>
+                    <mat-option value="travel">Travel & Transportation</mat-option>
+                    <mat-option value="utilities">Utilities</mat-option>
+                    <mat-option value="professional_services">Professional Services</mat-option>
+                    <mat-option value="insurance">Insurance</mat-option>
+                    <mat-option value="maintenance">Maintenance & Repairs</mat-option>
+                    <mat-option value="training">Training & Development</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Branch -->
+              <div class="col-md-3 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Branch</mat-label>
+                  <mat-select formControlName="branch">
+                    <mat-option value="head_office">Head Office - Victoria Island</mat-option>
+                    <mat-option value="lagos_ikeja">Lagos Branch - Ikeja</mat-option>
+                    <mat-option value="abuja_wuse">Abuja Branch - Wuse II</mat-option>
+                    <mat-option value="portharcourt_gra">Port Harcourt Branch - GRA</mat-option>
+                    <mat-option value="kano_sabon">Kano Branch - Sabon Gari</mat-option>
+                    <mat-option value="ibadan_bodija">Ibadan Branch - Bodija</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Account Number -->
+              <div class="col-md-3 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Account Number</mat-label>
+                  <mat-select formControlName="accountNumber">
+                    <mat-option value="1001">1001 - Cash at Bank</mat-option>
+                    <mat-option value="1002">1002 - Petty Cash</mat-option>
+                    <mat-option value="2001">2001 - Accounts Payable</mat-option>
+                    <mat-option value="3001">3001 - Capital Account</mat-option>
+                    <mat-option value="4001">4001 - Revenue Account</mat-option>
+                    <mat-option value="5001">5001 - Operating Expenses</mat-option>
+                    <mat-option value="6001">6001 - Administrative Expenses</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Account Name -->
+              <div class="col-md-3 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Account Name</mat-label>
+                  <mat-select formControlName="accountName">
+                    <mat-option value="cash_bank">Cash at Bank</mat-option>
+                    <mat-option value="petty_cash">Petty Cash</mat-option>
+                    <mat-option value="accounts_payable">Accounts Payable</mat-option>
+                    <mat-option value="capital_account">Capital Account</mat-option>
+                    <mat-option value="revenue_account">Revenue Account</mat-option>
+                    <mat-option value="operating_expenses">Operating Expenses</mat-option>
+                    <mat-option value="admin_expenses">Administrative Expenses</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Narrative -->
+              <div class="col-md-6 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Narrative</mat-label>
+                  <input matInput formControlName="narrative" placeholder="Enter description">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Amount -->
+              <div class="col-md-3 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Amount</mat-label>
+                  <input matInput type="number" formControlName="amount" placeholder="0.00" min="0" step="0.01">
+                </mat-form-field>
+              </div>
+
+              <!-- Side -->
+              <div class="col-md-3 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Side</mat-label>
+                  <mat-select formControlName="side">
+                    <mat-option value="debit">Debit</mat-option>
+                    <mat-option value="credit">Credit</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- VAT Rate -->
+              <div class="col-md-3 mb-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>VAT Rate (%)</mat-label>
+                  <mat-select formControlName="vatRate">
+                    <mat-option value="0">0% - Exempt</mat-option>
+                    <mat-option value="7.5">7.5% - Standard Rate</mat-option>
+                    <mat-option value="5">5% - Reduced Rate</mat-option>
+                    <mat-option value="15">15% - Luxury Items</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Add Button -->
+              <div class="col-md-3 mb-3 d-flex align-items-end">
+                <button type="button" class="btn btn-primary w-100" (click)="addGeneralLedgerEntry()">
+                  Add Entry
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- General Ledger Table -->
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>Auto Apportion</th>
+              <th>Cost Center</th>
+              <th>Expense Type</th>
+              <th>Branch</th>
+              <th>Account No.</th>
+              <th>Account Name</th>
+              <th>Narrative</th>
+              <th>Amount</th>
+              <th>Side</th>
+              <th>VAT Rate</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let entry of generalLedgerEntries; let i = index">
+              <td>{{ entry.autoApportion }}</td>
+              <td>{{ entry.costCenterName }}</td>
+              <td>{{ entry.expenseTypeName }}</td>
+              <td>{{ entry.branch }}</td>
+              <td>{{ entry.accountNumber }}</td>
+              <td>{{ entry.accountName }}</td>
+              <td>{{ entry.narrative }}</td>
+              <td>{{ entry.amount | currency:'₦':'symbol':'1.2-2' }}</td>
+              <td>
+                <span class="badge" [class]="entry.side === 'debit' ? 'bg-danger' : 'bg-success'">
+                  {{ entry.side | titlecase }}
+                </span>
+              </td>
+              <td>{{ entry.vatRate }}%</td>
+              <td>
+                <button type="button" class="btn btn-sm btn-outline-danger" (click)="removeGeneralLedgerEntry(i)">
+                  <i class="fas fa-trash"></i> Remove
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="generalLedgerEntries.length === 0">
+              <td colspan="11" class="text-center text-muted">No entries added yet</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Summary -->
+      <div class="row mt-3" *ngIf="generalLedgerEntries.length > 0">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">Summary</h6>
+              <p class="mb-1"><strong>Total Entries:</strong> {{ generalLedgerEntries.length }}</p>
+              <p class="mb-1"><strong>Total Debit:</strong> {{ getTotalDebit() | currency:'₦':'symbol':'1.2-2' }}</p>
+              <p class="mb-0"><strong>Total Credit:</strong> {{ getTotalCredit() | currency:'₦':'symbol':'1.2-2' }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">Balance Check</h6>
+              <p class="mb-0">
+                <strong>Difference:</strong>
+                <span [class]="getBalanceDifference() === 0 ? 'text-success' : 'text-danger'">
+                  {{ getBalanceDifference() | currency:'₦':'symbol':'1.2-2' }}
+                </span>
+              </p>
+              <small class="text-muted">
+                {{ getBalanceDifference() === 0 ? 'Balanced ✓' : 'Not balanced - adjust entries' }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
+      <button type="button" class="btn btn-primary" (click)="saveGeneralLedger()" [disabled]="generalLedgerEntries.length === 0">
+        Save General Ledger
+      </button>
+    </div>
+  </div>
+</ng-template>

@@ -175,7 +175,7 @@ table {
 /* Custom styling for payee modal window */
 ::ng-deep .payee-modal-window {
   .modal-dialog {
-    max-width: 95vw;
+    max-width: 40vw;
     margin: 1rem auto;
   }
 

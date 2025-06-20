@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChildren, QueryList } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { MatSelect } from '@angular/material/select';
 import { PayeeModel, PaymentOption, PayeeType, Currency, BankBranch } from '../../models/payee.model';
 // Removed MockServiceService import since we're using only static data
 
@@ -10,9 +11,12 @@ import { PayeeModel, PaymentOption, PayeeType, Currency, BankBranch } from '../.
   templateUrl: './payee-modal.component.html',
   styleUrls: ['./payee-modal.component.scss']
 })
-export class PayeeModalComponent implements OnInit {
+export class PayeeModalComponent implements OnInit, OnDestroy {
   payeeForm!: FormGroup;
-  
+
+  // ViewChildren to access all mat-select dropdowns
+  @ViewChildren(MatSelect) matSelects!: QueryList<MatSelect>;
+
   // Dropdown options - will be initialized in constructor
   paymentOptions: PaymentOption[] = [];
   payeeTypes: PayeeType[] = [];
@@ -34,18 +38,11 @@ export class PayeeModalComponent implements OnInit {
     // Additional data loading (though most should be done in constructor)
     this.loadBankBranches();
     this.loadBankAccounts();
+  }
 
-    // Force a timeout to ensure everything is loaded
-    setTimeout(() => {
-      console.log('=== PayeeModalComponent ngOnInit (After Timeout) ===');
-      console.log('Bank Branches:', this.bankBranches?.length || 0, this.bankBranches);
-      console.log('Bank Accounts:', this.bankAccounts?.length || 0, this.bankAccounts);
-      console.log('Payment Options:', this.paymentOptions?.length || 0, this.paymentOptions);
-      console.log('Payee Types:', this.payeeTypes?.length || 0, this.payeeTypes);
-      console.log('Currencies:', this.currencies?.length || 0, this.currencies);
-      console.log('Form initialized:', !!this.payeeForm);
-      console.log('Form value:', this.payeeForm?.value);
-    }, 100);
+  ngOnDestroy(): void {
+    // Force close any open dropdowns when component is destroyed
+    this.closeAllDropdowns();
   }
 
   private initializeForm(): void {
@@ -71,12 +68,6 @@ export class PayeeModalComponent implements OnInit {
     this.loadBankBranches();
     this.loadBankAccounts();
 
-    // Ensure all arrays are properly initialized
-    console.log('Initializing dropdown data...');
-    console.log('Payment Options before:', this.paymentOptions?.length);
-    console.log('Payee Types before:', this.payeeTypes?.length);
-    console.log('Currencies before:', this.currencies?.length);
-
     // Force initialization if arrays are undefined
     if (!this.paymentOptions || this.paymentOptions.length === 0) {
       this.initializePaymentOptions();
@@ -87,10 +78,6 @@ export class PayeeModalComponent implements OnInit {
     if (!this.currencies || this.currencies.length === 0) {
       this.initializeCurrencies();
     }
-
-    console.log('Payment Options after:', this.paymentOptions?.length);
-    console.log('Payee Types after:', this.payeeTypes?.length);
-    console.log('Currencies after:', this.currencies?.length);
   }
 
   private initializePaymentOptions(): void {
@@ -162,7 +149,7 @@ export class PayeeModalComponent implements OnInit {
       { name: 'Calabar Branch - Marian Road', value: 'CAL_MAR', bankName: 'Custodian Bank' }
     ];
 
-    console.log('Bank branches loaded:', this.bankBranches.length);
+
   }
 
   private loadBankAccounts(): void {
@@ -180,7 +167,7 @@ export class PayeeModalComponent implements OnInit {
       { name: 'Emergency Fund Account - 8899001122 (Savings)', value: '8899001122' }
     ];
 
-    console.log('Bank accounts loaded:', this.bankAccounts.length);
+
   }
 
   onSave(): void {
@@ -206,7 +193,13 @@ export class PayeeModalComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.activeModal.dismiss();
+    // Force close any open dropdowns before dismissing modal
+    this.closeAllDropdowns();
+
+    // Small delay to ensure dropdowns are closed
+    setTimeout(() => {
+      this.activeModal.dismiss();
+    }, 50);
   }
 
   private markFormGroupTouched(): void {
@@ -307,40 +300,51 @@ export class PayeeModalComponent implements OnInit {
   }
 
   // TrackBy function for better performance in ngFor
-  trackByValue(index: number, item: any): any {
+  trackByValue(_index: number, item: any): any {
     return item.value;
   }
 
-  // Debug method to check dropdown data
-  checkDropdownData(): void {
-    console.log('=== Dropdown Data Check ===');
-    console.log('Bank Branches:', this.bankBranches?.length || 0, this.bankBranches);
-    console.log('Bank Accounts:', this.bankAccounts?.length || 0, this.bankAccounts);
-    console.log('Payment Options:', this.paymentOptions?.length || 0, this.paymentOptions);
-    console.log('Payee Types:', this.payeeTypes?.length || 0, this.payeeTypes);
-    console.log('Currencies:', this.currencies?.length || 0, this.currencies);
-    console.log('Form Value:', this.payeeForm.value);
+  // Method to force close all open dropdowns
+  private closeAllDropdowns(): void {
+    try {
+      // Method 1: Close using ViewChildren (more targeted)
+      if (this.matSelects) {
+        this.matSelects.forEach(select => {
+          if (select.panelOpen) {
+            select.close();
+          }
+        });
+      }
 
-    // Force re-initialization if any arrays are empty
-    if (!this.paymentOptions?.length) {
-      console.log('Re-initializing payment options...');
-      this.initializePaymentOptions();
-    }
-    if (!this.payeeTypes?.length) {
-      console.log('Re-initializing payee types...');
-      this.initializePayeeTypes();
-    }
-    if (!this.currencies?.length) {
-      console.log('Re-initializing currencies...');
-      this.initializeCurrencies();
-    }
-    if (!this.bankBranches?.length) {
-      console.log('Re-initializing bank branches...');
-      this.loadBankBranches();
-    }
-    if (!this.bankAccounts?.length) {
-      console.log('Re-initializing bank accounts...');
-      this.loadBankAccounts();
+      // Method 2: Fallback - Close using DOM queries
+      const matSelects = document.querySelectorAll('mat-select');
+      matSelects.forEach(select => {
+        const selectElement = select as HTMLElement;
+        selectElement.blur();
+      });
+
+      // Method 3: Close any CDK overlays that might be open
+      const overlays = document.querySelectorAll('.cdk-overlay-backdrop, .cdk-overlay-pane');
+      overlays.forEach(overlay => {
+        const overlayElement = overlay as HTMLElement;
+        if (overlayElement.click) {
+          overlayElement.click();
+        }
+      });
+
+      // Method 4: Trigger escape key to close any open overlays
+      const escapeEvent = new KeyboardEvent('keydown', {
+        key: 'Escape',
+        code: 'Escape',
+        keyCode: 27,
+        bubbles: true
+      });
+      document.dispatchEvent(escapeEvent);
+
+    } catch (error) {
+      console.warn('Error closing dropdowns:', error);
     }
   }
+
+
 }
