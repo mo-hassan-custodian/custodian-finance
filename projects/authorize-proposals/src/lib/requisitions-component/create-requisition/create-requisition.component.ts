@@ -19,26 +19,43 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateBeneficiaryComponent } from 'src/app/pages/Beneficiary/createBeneficiary/create-beneficiary/create-beneficiary.component';
 
 @Component({
   selector: 'lib-create-requisition',
   templateUrl: './create-requisition.component.html',
-  styleUrls: ['./create-requisition.component.css'],
+  styleUrls: ['./create-requisition.component.scss'],
 })
 export class CreateRequisitionComponent implements OnInit {
   @ViewChild('batchUploadModal') batchUploadModal: any;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   searched: boolean = false;
   isProposal: boolean = false;
   searchResults: any[] = [];
-  displayedColumns: string[] = [
-    'policyNumber',
-    'proposalNumber',
-    'clientName',
-    'phoneNumber',
-    'product',
-    'status',
-  ];
+  displayedColumns: string[] = ['code', 'payeeName', 'amount','invoiceNumber','narrations','bankAcoount', 'payeeBank', "status", "actions",];
+  dataSource = new MatTableDataSource([
+    { code: 'REQ-001', payeeName: 'Zahra Musa', amount: 50000, 'payeeBank': "GTB", "status": "Pending", "invoiceNumber": "002"},
+    { code: 'REQ-002', payeeName: 'Tari Obi', amount: 65000, 'payeeBank': "UBA", "status": "Pending",  "invoiceNumber": "002"},
+    { code: 'REQ-003', payeeName: 'Kunle Adebayo', amount: 30000, 'payeeBank': "Access Bank","status": "Pending",  "invoiceNumber": "002"},
+    { code: 'REQ-003', payeeName: 'Kunle Adebayo', amount: 30000, 'payeeBank': "Access Bank", "status": "Pending",  "invoiceNumber": "002"},
+  ]);
+
+  // displayedColumns: string[] = [
+  //   'code',
+  //   'payeeName',
+  // 'invoiceNumber',
+  // 'amount',
+  // 'chequeDate',
+  // 'narration',
+  // 'bankAccount',
+  // 'type',
+  // 'paymentOption',
+  // 'payeeAccountNo',
+  // 'payeeBank'
+  // ];
+
 
   openModal() {
     this.modalService.open(this.batchUploadModal, {
@@ -64,8 +81,26 @@ export class CreateRequisitionComponent implements OnInit {
       phoneNumber: [''],
     });
   }
-
   ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  authorize(element: any) {
+
+  this.dialog.open(CreateBeneficiaryComponent,{
+          width:'70%',
+          height:'70%',
+          data:element   
+        });
+      }
+  
+
+  reject(element: any){
+
+  }
 
   viewDetails(item: any) {
     // this.router.navigate(['/details', item.proposalNumber]);

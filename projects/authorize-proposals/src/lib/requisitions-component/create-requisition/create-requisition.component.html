@@ -1,183 +1,47 @@
-<div>
-  <br />
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
-  <mat-card-title>Create Requisition</mat-card-title>
-  <button
-    mat-raised-button
-    color="primary"
-    style="float: right; margin-right: 20px; margin-bottom: 20px"
-    type="button"
-    (click)="openModal()"
-  >
-    Batch Upload
-  </button>
-  <div class="table-container">
-    <br />
+  <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      {{ column }}
+    </th>
 
-    <form [formGroup]="searchForm" class="padded-form">
-      <div class="form-flex">
-        <mat-form-field class="flex-item" appearance="fill">
-          <mat-label>Policy Number</mat-label>
-          <input formControlName="policyNumber" matInput type="text" />
-        </mat-form-field>
+    <td mat-cell *matCellDef="let element">
 
-        <mat-form-field class="flex-item" appearance="fill">
-          <mat-label>Proposal Number</mat-label>
-          <input formControlName="proposalNumber" matInput type="text" />
-        </mat-form-field>
-      </div>
+      <!-- Default cell content -->
+      <ng-template #normalCell>
+        {{ element[column] }}
+      </ng-template>
 
-      <div class="form-flex">
-        <mat-form-field class="flex-item" appearance="fill">
-          <mat-label>Client Name</mat-label>
-          <input formControlName="clientName" matInput type="text" />
-        </mat-form-field>
+      <ng-container *ngIf="column === 'actions'; else normalCell">
+        <button mat-button color="primary" (click)="authorize(element)">Authorize </button>
 
-        <mat-form-field class="flex-item" appearance="fill">
-          <mat-label>Phone Number</mat-label>
-          <input formControlName="phoneNumber" matInput type="number" />
-        </mat-form-field>
-      </div>
-    </form>
+        <button mat-button color="warn" (click)="reject(element)">Reject </button>
 
-    <button
-      mat-raised-button
-      color="primary"
-      style="float: right; margin-right: 20px; margin-bottom: 20px"
-      type="button"
-      (click)="search(searchResultsModal)"
-    >
-      Search
-    </button>
-  </div>
+        <!-- 3-dot menu -->
+        <button mat-icon-button [matMenuTriggerFor]="actionMenu" aria-label="Actions"><mat-icon>more_horiz</mat-icon></button>
 
-  <!-- Modal to Display Search Results -->
-  <ng-template #searchResultsModal let-modal>
-    <div class="modal-content custom-modal">
-      <div class="modal-header custom-header">
-        <h5 class="modal-title">Policies</h5>
-      </div>
+          
+        <!-- Dropdown for edit/view/delete -->
+        <mat-menu #actionMenu="matMenu">
+          <button mat-menu-item (click)="viewDetails(element)">
+            <mat-icon>visibility</mat-icon>
+            <span>View details</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </button>
+        </mat-menu>
+      </ng-container>
+    </td>
+  </ng-container>
 
-      <div class="modal-body custom-body">
-        <table class="table table-bordered">
-          <thead class="custom-table-header">
-            <tr>
-              <th>Proposal Number</th>
-              <th>Policy Number</th>
-              <th>Client</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of searchResults">
-              <td>{{ item.proposalNumber }}</td>
-              <td>{{ item.policyNumber }}</td>
-              <td>{{ item.clientName }}</td>
-              <td>
-                <!-- View Details Button -->
-                <button mat-button color="primary" (click)="viewDetails(item)">
-                  View Details
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-      <!-- Modal Footer -->
-      <div class="modal-footer custom-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close()">
-          Close
-        </button>
-      </div>
-    </div>
-  </ng-template>
-</div>
-
-<ng-template #searchResultsModal let-modal>
-  <div class="modal-content custom-modal">
-    <div class="modal-header custom-header">
-      <h5 class="modal-title">Policies</h5>
-    </div>
-
-    <div class="modal-body custom-body">
-      <table class="table table-bordered">
-        <thead class="custom-table-header">
-          <tr>
-            <th>Proposal Number</th>
-            <th>Policy Number</th>
-            <th>Client</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of searchResults">
-            <td>{{ item.proposalNumber }}</td>
-            <td>{{ item.policyNumber }}</td>
-            <td>{{ item.client }}</td>
-            <td>
-              <!-- View Details Button -->
-              <button mat-button color="primary" (click)="viewDetails(item)">
-                View Details
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Modal Footer -->
-    <div class="modal-footer custom-footer">
-      <button type="button" class="btn btn-secondary" (click)="modal.close()">
-        Close
-      </button>
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #batchUploadModal let-modal>
-  <div class="modal-content shadow-lg rounded-3">
-    <!-- Modal Header -->
-    <div
-      class="modal-header text-white d-flex justify-content-center"
-      style="background-color: #900000; height: 80px"
-    >
-      <h5 class="modal-title w-100 text-center fs-4 fw-bold">Batch Upload</h5>
-    </div>
-
-    <!-- Modal Body -->
-    <div class="modal-body px-6 py-4">
-      <!-- Download CSV Section -->
-      <div class="mb-4">
-        <h6 class="fw-bold">Download Sample CSV</h6>
-        <p>Download a sample CSV file to understand the required format.</p>
-        <button class="btn btn-primary" (click)="downloadSampleCSV()">
-          Download Sample CSV
-        </button>
-      </div>
-
-      <!-- Upload CSV Section -->
-      <div>
-        <h6 class="fw-bold">Upload CSV File</h6>
-        <p>Upload a CSV file to process the data.</p>
-        <input
-          type="file"
-          class="form-control"
-          accept=".csv"
-          (change)="onFileUpload($event)"
-        />
-      </div>
-    </div>
-
-    <!-- Modal Footer -->
-    <div class="modal-footer d-flex justify-content-center p-3">
-      <button
-        type="button"
-        class="btn btn-outline-dark rounded-2 px-4"
-        (click)="modal.dismiss()"
-      >
-        Close
-      </button>
-    </div>
-  </div>
-</ng-template>
+</table>
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
